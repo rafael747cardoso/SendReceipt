@@ -4,7 +4,7 @@
 ui <- shiny::fluidPage(
   
   # Theme
-  theme = bslib::bs_theme(bootswatch = "darkly"),
+  theme = bslib::bs_theme(bootswatch = "solar"),
   shiny::titlePanel("Receipt uploader"),
   
   # first a test for uploading an image from PC
