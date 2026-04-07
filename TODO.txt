@@ -1,12 +1,13 @@
 
-make a csv for storing categories of
-  Establishment Type - OK
-  Establishment Name
-  Purchase Type
-  Purchase Content
-at the repository itself
-  - use a function
-  
+- make a csv for storing categories of - OK
+    Establishment Type
+    Establishment Name
+    Purchase Type
+    Purchase Content
+  at the repository itself
+    - use a function
+
+- replace TEST save to PC by Send email via Resend API
   
   
 
