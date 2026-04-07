@@ -94,7 +94,6 @@ server <- function(input, output, session) {
                     r = r, session = session)
   })
   shiny::observeEvent(input$purchase_type, {
-    browser()
     fct_update_cats(input_cat = input$purchase_type, 
                     var_name = "purchase_type",
                     r = r, session = session)

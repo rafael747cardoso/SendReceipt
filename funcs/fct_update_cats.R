@@ -19,7 +19,7 @@ fct_update_cats <- function(input_cat, var_name, r, session) {
     ### Update selected ----
     shiny::updateSelectizeInput(
       session = session,
-      inputId = "establishment_type",
+      inputId = var_name,
       choices = r[[paste0("opts_", var_name)]],
       selected = val
     )
