@@ -51,6 +51,7 @@ ui <- shiny::fluidPage(
   
 )
 
+
 # Backend ----
 server <- function(input, output, session) {
   
@@ -58,7 +59,9 @@ server <- function(input, output, session) {
   r <- shiny::reactiveValues()
   r$opts_establishment_type <- data.table::fread("data/establishment_type.csv")$category
   
-  ### Establishment Type selector ----
+  ## Build dropdowns ----
+  
+  ### Establishment Type ----
   output$establishment_type_ui <- shiny::renderUI({
     shiny::selectizeInput(
       inputId = "establishment_type",
@@ -70,35 +73,19 @@ server <- function(input, output, session) {
       )
     )
   })
-  
+
   ## Update categories ----
   shiny::observeEvent(input$establishment_type, {
-    
-    val <- tools::toTitleCase(trimws(input$establishment_type))
-    req(val != "")
-    
-    if (!(tolower(val) %in% tolower(r$opts_establishment_type))) {
-      
-      ### Update options ----
-      r$opts_establishment_type <- sort(c(r$opts_establishment_type, val))
-      
-      ### Append CSV with new option ----
-      data.table::fwrite(
-        x = data.table::data.table(category = r$opts_establishment_type),
-        file = "data/establishment_type.csv",
-        quote = TRUE
-      )      
-      
-      ### Update selected ----
-      shiny::updateSelectizeInput(
-        session = session,
-        inputId = "establishment_type",
-        choices = r$opts_establishment_type,
-        selected = val
-      )
-    }
+    fct_update_cats(input_cat = input$establishment_type, 
+                    var_name = "establishment_type",
+                    r = r,
+                    session = session)
   })
+
   
+  
+  
+    
   
   ## Display the photo for checking ----
   output$uploaded_photo <- shiny::renderImage({
