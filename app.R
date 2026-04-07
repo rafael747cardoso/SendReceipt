@@ -117,20 +117,22 @@ server <- function(input, output, session) {
   ## Send to email ----
   shiny::observeEvent(input$btn_send_email, {
     
-    req(input$receipt_photo)
-    req(input$establishment_type)
-    
+    req(
+      input$receipt_photo,
+      input$establishment_type
+    )
+
     ### Build file name ----
-    # to uniquely identify the purchase
+    # "timestampe; purch-date; estab-type; estab-name; purch-type; purch-content"
     
     #### Timestamp ----
     photo_name <- format(Sys.time(), "%Y%m%d_%H%M%S")
     
-    #### When: Date ----
-    photo_name <- paste(photo_name, "; pursh_date ", input$purchase_date)
+    #### When: Purchase Date ----
+    photo_name <- paste0(photo_name, "; ", input$purchase_date)
     
     #### Where: Establishment Type ----
-    photo_name <- paste(photo_name, "; estab_type ", input$establishment_type)
+    photo_name <- paste0(photo_name, "; ", input$establishment_type)
     
     #### Where: Establishment Name ----
     
