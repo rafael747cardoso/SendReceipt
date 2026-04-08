@@ -1,15 +1,5 @@
 
-- make a csv for storing categories of - OK
-    Establishment Type
-    Establishment Name
-    Purchase Type
-    Purchase Content
-  at the repository itself
-    - use a function
-
 - replace TEST save to PC by Send email via Resend API
-  
-  
 
 
 A. Resend account setup
@@ -20,10 +10,16 @@ Create an API key → copy it
 
 B. Build the Shiny app locally
 
-Create a project with app.R containing: fileInput (with accept = "image/*" and capture = "environment" for phone camera), dateInput, three selectInputs (establishment type, name, purchase type), and an actionButton to send
-On button click: read the uploaded photo, base64-encode it, POST to Resend's /emails endpoint via httr2 with the image as attachment and metadata in the subject/body
+Create a project with app.R containing:
+	fileInput (with accept = "image/*" and capture = "environment" for phone camera)
+	dateInput
+	three selectInputs (establishment type, name, purchase type)
+	actionButton to send 
+		On button click
+			read the uploaded photo
+			base64-encode it
+			POST to Resend's /emails endpoint via httr2 with the image as attachment and metadata in the subject/body
 Store the API key in an .Renviron file locally (RESEND_API_KEY=re_xxxxx)
-Test it with shiny::runApp()
 
 C. Push to GitHub
 

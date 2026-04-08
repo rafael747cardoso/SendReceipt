@@ -192,16 +192,51 @@ server <- function(input, output, session) {
       }
     }
 
-    ### TEST: save to PC ----
-    file.copy(
-      from = input$receipt_photo$datapath,
-      to = paste0("dev_tests/", photo_name, ".jpeg")
-    )
-    
     ### Send email via Resend API ----
     
+    #### Photo data ----
+    photo_path <- input$receipt_photo$datapath
+    photo_b64  <- base64enc::base64encode(photo_path)
     
+    #### API request ----
+    body <- list(
+      from    = "onboarding@resend.dev",
+      to      = list("receiptlake@gmail.com"),
+      subject = paste0("[RECEIPT] ", photo_name),
+      text    = photo_name,
+      attachments = list(
+        list(
+          filename     = paste0(photo_name, ".jpeg"),
+          content      = photo_b64,
+          content_type = "image/jpeg"
+        )
+      )
+    )
+    resp <- httr2::request("https://api.resend.com/emails") |>
+      httr2::req_headers(
+        Authorization = paste("Bearer", Sys.getenv("RESEND_API_KEY")),
+        `Content-Type` = "application/json"
+      ) |>
+      httr2::req_body_json(body) |>
+      httr2::req_perform()
     
+    #### Response status ----
+    if (httr2::resp_status(resp) == 200) {
+      shinyWidgets::sendSweetAlert(
+        session = session,
+        title = "Sent!",
+        text = "Receipt emailed successfully.",
+        type = "success"
+      )
+    } else {
+      shinyWidgets::sendSweetAlert(
+        session = session,
+        title = "Error",
+        text = paste("Failed to send. Status:", httr2::resp_status(resp)),
+        type = "error"
+      )
+    }
+
   })
 
 }
