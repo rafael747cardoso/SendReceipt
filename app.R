@@ -8,19 +8,11 @@ ui <- shiny::fluidPage(
   ## Theme ----
   theme = bslib::bs_theme(bootswatch = "darkly"),
   
-  ## Custom CSS for mobile ----
-  shiny::tags$head(shiny::tags$style(shiny::HTML("
-    body { max-width: 500px; margin: auto; padding: 10px; }
-    .btn-primary { width: 100%; margin-top: 15px; margin-bottom: 15px; font-size: 18px; padding: 12px; }
-    #uploaded_photo img { width: 100% !important; height: auto !important; border-radius: 8px; }
-    .inline-select .form-group { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-    .inline-select .control-label { white-space: nowrap; margin-bottom: 0; font-weight: bold; }
-    .inline-select .form-group > div { flex: 1; width: 100% !important; }
-    .inline-select .selectize-control { width: 100% !important; }
-    .inline-select .selectize-input { width: 100% !important; }
-    .inline-select .control-label { white-space: nowrap; margin-bottom: 0; font-weight: bold; min-width: 160px; }
-    .title-panel { margin-bottom: 20px; }
-  "))), 
+  ## Custom CSS/JS for mobile ----
+  shiny::tags$head(
+    shiny::tags$link(rel = "stylesheet", href = "styles.css"),
+    shiny::tags$script(src = "app.js")
+  ),
   
   shiny::div(class = "title-panel", shiny::titlePanel("Receipt uploader")),
   
@@ -91,46 +83,118 @@ server <- function(input, output, session) {
   ## Read categories from repo data ----
   r <- shiny::reactiveValues()
   r$opts_establishment_type <- data.table::fread("data/establishment_type.csv")$category
-  r$opts_establishment_name <- data.table::fread("data/establishment_name.csv")$category
+  r$opts_establishment_name <- data.table::fread("data/establishment_name.csv")
   r$opts_purchase_type      <- data.table::fread("data/purchase_type.csv")$category
   r$opts_purchase_content   <- data.table::fread("data/purchase_content.csv")$category
   
   ## Build dropdowns ----
+  
   output$establishment_type_ui <- shiny::renderUI({
     fct_custom_select("Establishment Type", r)
   })
+  
   output$establishment_name_ui <- shiny::renderUI({
-    fct_custom_select("Establishment Name", r)
+    shiny::div(
+      class = "inline-select",
+      shiny::selectizeInput(
+        inputId = "establishment_name",
+        label = "Establishment Name:",
+        choices = c(""),
+        width = "100%",
+        options = list(placeholder = "Select type first", create = TRUE)
+      )
+    )
   })
+  
   output$purchase_type_ui <- shiny::renderUI({
     fct_custom_select("Purchase Type", r)
   })
+  
   output$purchase_content_ui <- shiny::renderUI({
     fct_custom_select("Purchase Content", r)
   })
 
   ## Update categories ----
+  
   shiny::observeEvent(input$establishment_type, {
     fct_update_cats(input_cat = input$establishment_type, 
                     var_name = "establishment_type",
                     r = r, session = session)
   })
+  
   shiny::observeEvent(input$establishment_name, {
-    fct_update_cats(input_cat = input$establishment_name, 
-                    var_name = "establishment_name",
-                    r = r, session = session)
+    
+    val <- tools::toTitleCase(trimws(input$establishment_name))
+    req(val != "")
+    
+    current_type <- input$establishment_type
+    req(!is.null(current_type) && current_type != "")
+    
+    ## Check if name+type combo already exists ----
+    existing <- r$opts_establishment_name
+    already_exists <- any(tolower(existing$name) == tolower(val) & 
+                          tolower(existing$type) == tolower(current_type))
+    
+    if (!already_exists) {
+      
+      ## Add new row ----
+      new_row <- data.table::data.table(name = val, 
+                                        type = current_type)
+      r$opts_establishment_name <- rbind(r$opts_establishment_name, new_row)
+      r$opts_establishment_name <- r$opts_establishment_name[order(name)]
+      
+      ## Append CSV ----
+      data.table::fwrite(
+        x = r$opts_establishment_name,
+        file = "data/establishment_name.csv",
+        quote = TRUE
+      )
+      
+      ## Update dropdown with filtered names ----
+      filtered <- r$opts_establishment_name[type == current_type]$name
+      shiny::updateSelectizeInput(
+        session = session,
+        inputId = "establishment_name",
+        choices = c("", filtered),
+        selected = val
+      )
+    }
+    
   })
+  
   shiny::observeEvent(input$purchase_type, {
     fct_update_cats(input_cat = input$purchase_type, 
                     var_name = "purchase_type",
                     r = r, session = session)
   })
+  
   shiny::observeEvent(input$purchase_content, {
     fct_update_cats(input_cat = input$purchase_content, 
                     var_name = "purchase_content",
                     r = r, session = session)
   })
 
+  ## Filter establishment names by selected type ----
+  shiny::observeEvent(input$establishment_type, {
+    
+    all_names <- r$opts_establishment_name
+    
+    if (!is.null(input$establishment_type) && input$establishment_type != "") {
+      filtered <- all_names[type == input$establishment_type]$name
+    } else {
+      filtered <- all_names$name
+    }
+    
+    shiny::updateSelectizeInput(
+      session = session,
+      inputId = "establishment_name",
+      choices = c("", filtered),
+      selected = "",
+      options = list(placeholder = "Search or create", create = TRUE)
+    )
+    
+  }, ignoreInit = TRUE)
+  
   ## Display the photo for checking ----
   output$uploaded_photo <- shiny::renderImage({
     
