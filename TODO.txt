@@ -1,5 +1,4 @@
 
-- replace TEST save to PC by Send email via Resend API
 
 
 A. Resend account setup
