@@ -84,7 +84,7 @@ server <- function(input, output, session) {
   r <- shiny::reactiveValues()
   r$opts_establishment_type <- data.table::fread("data/establishment_type.csv")$category
   r$opts_establishment_name <- data.table::fread("data/establishment_name.csv")
-  r$opts_purchase_type      <- data.table::fread("data/purchase_type.csv")$category
+  r$opts_purchase_type      <- data.table::fread("data/purchase_type.csv")
   r$opts_purchase_content   <- data.table::fread("data/purchase_content.csv")$category
   
   ## Build dropdowns ----
@@ -107,7 +107,16 @@ server <- function(input, output, session) {
   })
   
   output$purchase_type_ui <- shiny::renderUI({
-    fct_custom_select("Purchase Type", r)
+    shiny::div(
+      class = "inline-select",
+      shiny::selectizeInput(
+        inputId = "purchase_type",
+        label = "Purchase Type:",
+        choices = c(""),
+        width = "100%",
+        options = list(placeholder = "Select estab. type first", create = TRUE)
+      )
+    )
   })
   
   output$purchase_content_ui <- shiny::renderUI({
@@ -130,7 +139,7 @@ server <- function(input, output, session) {
     current_type <- input$establishment_type
     req(!is.null(current_type) && current_type != "")
     
-    ## Check if name+type combo already exists ----
+    ## Check if combo already exists ----
     existing <- r$opts_establishment_name
     already_exists <- any(tolower(existing$name) == tolower(val) & 
                           tolower(existing$type) == tolower(current_type))
@@ -163,9 +172,41 @@ server <- function(input, output, session) {
   })
   
   shiny::observeEvent(input$purchase_type, {
-    fct_update_cats(input_cat = input$purchase_type, 
-                    var_name = "purchase_type",
-                    r = r, session = session)
+    
+    val <- tools::toTitleCase(trimws(input$purchase_type))
+    req(val != "")
+    
+    current_type <- input$establishment_type
+    req(!is.null(current_type) && current_type != "")
+    
+    ## Check if combo already exists ----
+    existing <- r$opts_purchase_type
+    already_exists <- any(tolower(existing$purchase) == tolower(val) & 
+                            tolower(existing$type) == tolower(current_type))
+    
+    if (!already_exists) {
+      
+      ## Add new row ----
+      new_row <- data.table::data.table(purchase = val, type = current_type)
+      r$opts_purchase_type <- rbind(r$opts_purchase_type, new_row)
+      r$opts_purchase_type <- r$opts_purchase_type[order(purchase)]
+      
+      ## Append CSV ----
+      data.table::fwrite(
+        x = r$opts_purchase_type,
+        file = "data/purchase_type.csv",
+        quote = TRUE
+      )
+      
+      filtered <- r$opts_purchase_type[type == current_type]$purchase
+      shiny::updateSelectizeInput(
+        session = session,
+        inputId = "purchase_type",
+        choices = c("", filtered),
+        selected = val
+      )
+    }
+    
   })
   
   shiny::observeEvent(input$purchase_content, {
@@ -174,9 +215,10 @@ server <- function(input, output, session) {
                     r = r, session = session)
   })
 
-  ## Filter establishment names by selected type ----
+  ## Filters in dropdowns ----
   shiny::observeEvent(input$establishment_type, {
     
+    ## Filter establishment names by selected establishment type ----
     all_names <- r$opts_establishment_name
     
     if (!is.null(input$establishment_type) && input$establishment_type != "") {
@@ -189,6 +231,23 @@ server <- function(input, output, session) {
       session = session,
       inputId = "establishment_name",
       choices = c("", filtered),
+      selected = "",
+      options = list(placeholder = "Search or create", create = TRUE)
+    )
+    
+    # Filter purchase types by selected establishment type
+    all_purchases <- r$opts_purchase_type
+    
+    if (!is.null(input$establishment_type) && input$establishment_type != "") {
+      filtered_purchases <- all_purchases[type == input$establishment_type]$purchase
+    } else {
+      filtered_purchases <- all_purchases$purchase
+    }
+    
+    shiny::updateSelectizeInput(
+      session = session,
+      inputId = "purchase_type",
+      choices = c("", filtered_purchases),
       selected = "",
       options = list(placeholder = "Search or create", create = TRUE)
     )
