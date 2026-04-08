@@ -8,19 +8,11 @@ ui <- shiny::fluidPage(
   ## Theme ----
   theme = bslib::bs_theme(bootswatch = "darkly"),
   
-  ## Custom CSS for mobile ----
-  shiny::tags$head(shiny::tags$style(shiny::HTML("
-    body { max-width: 500px; margin: auto; padding: 10px; }
-    .btn-primary { width: 100%; margin-top: 15px; margin-bottom: 15px; font-size: 18px; padding: 12px; }
-    #uploaded_photo img { width: 100% !important; height: auto !important; border-radius: 8px; }
-    .inline-select .form-group { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-    .inline-select .control-label { white-space: nowrap; margin-bottom: 0; font-weight: bold; }
-    .inline-select .form-group > div { flex: 1; width: 100% !important; }
-    .inline-select .selectize-control { width: 100% !important; }
-    .inline-select .selectize-input { width: 100% !important; }
-    .inline-select .control-label { white-space: nowrap; margin-bottom: 0; font-weight: bold; min-width: 160px; }
-    .title-panel { margin-bottom: 20px; }
-  "))), 
+  ## Custom CSS/JS for mobile ----
+  shiny::tags$head(
+    shiny::tags$link(rel = "stylesheet", href = "styles.css"),
+    shiny::tags$script(src = "app.js")
+  ),
   
   shiny::div(class = "title-panel", shiny::titlePanel("Receipt uploader")),
   

@@ -1,0 +1,199 @@
+/* ── Layout ── */
+body {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 16px;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Title ── */
+.title-panel { margin-bottom: 24px; }
+.title-panel h2 {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* ── Photo upload ── */
+.btn-file {
+  border-radius: 10px !important;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.form-group.shiny-input-container:has(.btn-file) {
+  background: rgba(255, 255, 255, 0.04);
+  border: 2px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 16px;
+  transition: border-color 0.3s;
+}
+.form-group.shiny-input-container:has(.btn-file):hover {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+#uploaded_photo img {
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  margin-bottom: 8px;
+}
+
+/* ── Dividers ── */
+hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin: 16px 0;
+}
+
+/* ── Inline select rows ── */
+.inline-select .form-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.inline-select .control-label {
+  white-space: nowrap;
+  margin-bottom: 0;
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 150px;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.2px;
+}
+.inline-select .form-group > div { flex: 1; width: 100% !important; }
+.inline-select .selectize-control { width: 100% !important; }
+.inline-select .selectize-input { width: 100% !important; }
+
+/* ── Selectize styling ── */
+.selectize-input {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 10px !important;
+  padding: 10px 14px !important;
+  font-size: 15px !important;
+  color: #fff !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+}
+.selectize-input.focus {
+  border-color: rgba(100, 160, 255, 0.5) !important;
+  box-shadow: 0 0 0 3px rgba(100, 160, 255, 0.12) !important;
+}
+.selectize-input .item {
+  color: #fff !important;
+  font-size: 15px;
+}
+.selectize-input input::placeholder {
+  color: rgba(255, 255, 255, 0.35) !important;
+}
+.selectize-dropdown {
+  background: #1e2a3a !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 10px !important;
+  margin-top: 4px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+  overflow: hidden;
+}
+.selectize-dropdown .option {
+  padding: 10px 14px !important;
+  font-size: 14px !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  transition: background 0.15s;
+}
+.selectize-dropdown .option:hover,
+.selectize-dropdown .active {
+  background: rgba(100, 160, 255, 0.15) !important;
+  color: #fff !important;
+}
+.selectize-dropdown .create {
+  padding: 10px 14px !important;
+  font-size: 14px !important;
+  color: rgba(100, 200, 140, 0.9) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ── Date input ── */
+.inline-select input[type="text"].form-control {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 10px !important;
+  padding: 10px 14px !important;
+  font-size: 15px !important;
+  color: #fff !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ── Send button ── */
+.bttn-fill.bttn-primary {
+  background: linear-gradient(135deg, #2d6fe0, #1b4fa0) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+  padding: 14px !important;
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+  box-shadow: 0 4px 16px rgba(45, 111, 224, 0.3) !important;
+  transition: transform 0.15s, box-shadow 0.15s !important;
+  width: 100%;
+}
+.bttn-fill.bttn-primary:active {
+  transform: scale(0.97) !important;
+  box-shadow: 0 2px 8px rgba(45, 111, 224, 0.3) !important;
+}
+
+/* ── Blur overlay ── */
+.selectize-dropdown, .selectize-input.focus {
+  z-index: 9999 !important;
+  position: relative;
+}
+.selectize-control .selectize-dropdown {
+  z-index: 9999 !important;
+}
+.selectize-control.focus-blur-active::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 9990;
+  pointer-events: none;
+}
+
+/* ── Calendar blur overlay ── */
+body.datepicker-blur::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 9990;
+  pointer-events: none;
+}
+body.datepicker-blur .inline-select:has(#purchase_date) {
+  position: relative;
+  z-index: 9999;
+}
+body.datepicker-blur .air-datepicker-global-container,
+body.datepicker-blur .datepicker,
+body.datepicker-blur .datepicker--container {
+  z-index: 9999 !important;
+}
+
+/* ── SweetAlert dark override ── */
+.swal-modal {
+  background: #1a2332 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5) !important;
+}
+.swal-title { color: #fff !important; }
+.swal-text { color: rgba(255, 255, 255, 0.7) !important; }
+.swal-button {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+}
