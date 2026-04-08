@@ -324,7 +324,7 @@ server <- function(input, output, session) {
     #### API request ----
     body <- list(
       from    = "onboarding@resend.dev",
-      to      = list("receiptlake@gmail.com"),
+      to = list(Sys.getenv("RESEND_TO_EMAIL")),
       subject = paste0("[RECEIPT] ", photo_name),
       text    = photo_name,
       attachments = list(
