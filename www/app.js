@@ -107,8 +107,16 @@ if (window.visualViewport) {
   });
 }
 
-// ── Prevent soft keyboard on datepicker (use calendar only) ──
-$(document).on('shiny:connected', function() {
-  $('#purchase_date').attr('readonly', true);
-});
+// ── Prevent soft keyboard on datepicker ──
+function makeDateReadonly() {
+  var el = document.getElementById('purchase_date');
+  if (el) {
+    el.setAttribute('readonly', 'readonly');
+    el.setAttribute('inputmode', 'none');
+  } else {
+    setTimeout(makeDateReadonly, 200);
+  }
+}
+$(document).on('shiny:connected', makeDateReadonly);
+setTimeout(makeDateReadonly, 500);
 
