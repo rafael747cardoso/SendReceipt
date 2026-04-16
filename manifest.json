@@ -223,6 +223,41 @@
         "RemoteSha": "1.1.0"
       }
     },
+    "cellranger": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "description": {
+        "Package": "cellranger",
+        "Title": "Translate Spreadsheet Cell Ranges to Rows and Columns",
+        "Version": "1.1.0",
+        "Authors@R": "c(\n    person(\"Jennifer\", \"Bryan\", , \"jenny@stat.ubc.ca\", c(\"cre\", \"aut\")),\n    person(\"Hadley\", \"Wickham\", , \"hadley@rstudio.com\", \"ctb\")\n  )",
+        "Description": "Helper functions to work with spreadsheets and the \"A1:D10\" style\n    of cell range specification.",
+        "Depends": "R (>= 3.0.0)",
+        "License": "MIT + file LICENSE",
+        "LazyData": "true",
+        "URL": "https://github.com/rsheets/cellranger",
+        "BugReports": "https://github.com/rsheets/cellranger/issues",
+        "Suggests": "covr, testthat (>= 1.0.0), knitr, rmarkdown",
+        "RoxygenNote": "5.0.1.9000",
+        "VignetteBuilder": "knitr",
+        "Imports": "rematch, tibble",
+        "NeedsCompilation": "no",
+        "Packaged": "2016-07-26 06:50:00 UTC; jenny",
+        "Author": "Jennifer Bryan [cre, aut],\n  Hadley Wickham [ctb]",
+        "Maintainer": "Jennifer Bryan <jenny@stat.ubc.ca>",
+        "Repository": "RSPM",
+        "Date/Publication": "2016-07-27 03:17:48",
+        "Encoding": "UTF-8",
+        "Built": "R 4.4.0; ; 2024-04-25 00:02:03 UTC; windows",
+        "RemoteType": "standard",
+        "RemotePkgRef": "cellranger",
+        "RemoteRef": "cellranger",
+        "RemoteRepos": "https://packagemanager.posit.co/cran/latest",
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "x86_64-w64-mingw32",
+        "RemoteSha": "1.1.0"
+      }
+    },
     "cli": {
       "Source": "CRAN",
       "Repository": "https://packagemanager.posit.co/cran/latest",
@@ -543,6 +578,43 @@
         "RemoteSha": "1.6.5"
       }
     },
+    "gargle": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "description": {
+        "Package": "gargle",
+        "Title": "Utilities for Working with Google APIs",
+        "Version": "1.6.1",
+        "Authors@R": "c(\n    person(\"Jennifer\", \"Bryan\", , \"jenny@posit.co\", role = c(\"aut\", \"cre\"),\n           comment = c(ORCID = \"0000-0002-6983-2759\")),\n    person(\"Craig\", \"Citro\", , \"craigcitro@google.com\", role = \"aut\"),\n    person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = \"aut\",\n           comment = c(ORCID = \"0000-0003-4757-117X\")),\n    person(\"Google Inc\", role = \"cph\"),\n    person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\"))\n  )",
+        "Description": "Provides utilities for working with Google APIs\n    <https://developers.google.com/apis-explorer>.  This includes\n    functions and classes for handling common credential types and for\n    preparing, executing, and processing HTTP requests.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://gargle.r-lib.org, https://github.com/r-lib/gargle",
+        "BugReports": "https://github.com/r-lib/gargle/issues",
+        "Depends": "R (>= 4.1)",
+        "Imports": "cli (>= 3.0.1), fs (>= 1.3.1), glue (>= 1.3.0), httr (>=\n1.4.5), jsonlite, lifecycle (>= 0.2.0), openssl, rappdirs,\nrlang (>= 1.1.0), stats, utils, withr",
+        "Suggests": "aws.ec2metadata, aws.signature, covr, httpuv, knitr,\nrmarkdown, sodium, spelling, testthat (>= 3.1.7)",
+        "VignetteBuilder": "knitr",
+        "Config/Needs/website": "tidyverse/tidytemplate",
+        "Config/testthat/edition": "3",
+        "Encoding": "UTF-8",
+        "Language": "en-US",
+        "RoxygenNote": "7.3.3",
+        "NeedsCompilation": "no",
+        "Packaged": "2026-01-28 21:12:16 UTC; jenny",
+        "Author": "Jennifer Bryan [aut, cre] (ORCID:\n    <https://orcid.org/0000-0002-6983-2759>),\n  Craig Citro [aut],\n  Hadley Wickham [aut] (ORCID: <https://orcid.org/0000-0003-4757-117X>),\n  Google Inc [cph],\n  Posit Software, PBC [cph, fnd]",
+        "Maintainer": "Jennifer Bryan <jenny@posit.co>",
+        "Repository": "RSPM",
+        "Date/Publication": "2026-01-29 06:10:33 UTC",
+        "Built": "R 4.4.0; ; 2026-01-30 06:21:36 UTC; windows",
+        "RemoteType": "standard",
+        "RemotePkgRef": "gargle",
+        "RemoteRef": "gargle",
+        "RemoteRepos": "https://packagemanager.posit.co/cran/latest",
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "x86_64-w64-mingw32",
+        "RemoteSha": "1.6.1"
+      }
+    },
     "glue": {
       "Source": "CRAN",
       "Repository": "https://packagemanager.posit.co/cran/latest",
@@ -579,6 +651,80 @@
         "RemoteReposName": "CRAN",
         "RemotePkgPlatform": "x86_64-w64-mingw32",
         "RemoteSha": "1.8.0"
+      }
+    },
+    "googledrive": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "description": {
+        "Package": "googledrive",
+        "Title": "An Interface to Google Drive",
+        "Version": "2.1.2",
+        "Authors@R": "c(\n    person(\"Lucy\", \"D'Agostino McGowan\", , role = \"aut\"),\n    person(\"Jennifer\", \"Bryan\", , \"jenny@posit.co\", role = c(\"aut\", \"cre\"),\n           comment = c(ORCID = \"0000-0002-6983-2759\")),\n    person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\"))\n  )",
+        "Description": "Manage Google Drive files from R.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://googledrive.tidyverse.org,\nhttps://github.com/tidyverse/googledrive",
+        "BugReports": "https://github.com/tidyverse/googledrive/issues",
+        "Depends": "R (>= 4.1)",
+        "Imports": "cli (>= 3.0.0), gargle (>= 1.6.0), glue (>= 1.4.2), httr,\njsonlite, lifecycle, magrittr, pillar (>= 1.9.0), purrr (>=\n1.0.1), rlang (>= 1.0.2), tibble (>= 2.0.0), utils, uuid, vctrs\n(>= 0.3.0), withr",
+        "Suggests": "curl, dplyr (>= 1.0.0), knitr, rmarkdown, spelling, testthat\n(>= 3.1.5)",
+        "VignetteBuilder": "knitr",
+        "Config/Needs/website": "tidyverse, tidyverse/tidytemplate",
+        "Config/testthat/edition": "3",
+        "Encoding": "UTF-8",
+        "Language": "en-US",
+        "RoxygenNote": "7.3.3",
+        "NeedsCompilation": "no",
+        "Packaged": "2025-09-10 06:10:03 UTC; jenny",
+        "Author": "Lucy D'Agostino McGowan [aut],\n  Jennifer Bryan [aut, cre] (ORCID:\n    <https://orcid.org/0000-0002-6983-2759>),\n  Posit Software, PBC [cph, fnd]",
+        "Maintainer": "Jennifer Bryan <jenny@posit.co>",
+        "Repository": "RSPM",
+        "Date/Publication": "2025-09-10 08:50:06 UTC",
+        "Built": "R 4.4.0; ; 2025-09-11 04:35:02 UTC; windows",
+        "RemoteType": "standard",
+        "RemotePkgRef": "googledrive",
+        "RemoteRef": "googledrive",
+        "RemoteRepos": "https://packagemanager.posit.co/cran/latest",
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "x86_64-w64-mingw32",
+        "RemoteSha": "2.1.2"
+      }
+    },
+    "googlesheets4": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "description": {
+        "Package": "googlesheets4",
+        "Title": "Access Google Sheets using the Sheets API V4",
+        "Version": "1.1.2",
+        "Authors@R": "c(\n    person(\"Jennifer\", \"Bryan\", , \"jenny@posit.co\", role = c(\"cre\", \"aut\"),\n           comment = c(ORCID = \"0000-0002-6983-2759\")),\n    person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\"))\n  )",
+        "Description": "Interact with Google Sheets through the Sheets API v4\n    <https://developers.google.com/sheets/api>. \"API\" is an acronym for\n    \"application programming interface\"; the Sheets API allows users to\n    interact with Google Sheets programmatically, instead of via a web\n    browser. The \"v4\" refers to the fact that the Sheets API is currently\n    at version 4. This package can read and write both the metadata and\n    the cell data in a Sheet.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://googlesheets4.tidyverse.org,\nhttps://github.com/tidyverse/googlesheets4",
+        "BugReports": "https://github.com/tidyverse/googlesheets4/issues",
+        "Depends": "R (>= 3.6)",
+        "Imports": "cellranger, cli (>= 3.0.0), curl, gargle (>= 1.6.0), glue (>=\n1.3.0), googledrive (>= 2.1.0), httr, ids, lifecycle, magrittr,\nmethods, purrr, rematch2, rlang (>= 1.0.2), tibble (>= 2.1.1),\nutils, vctrs (>= 0.2.3), withr",
+        "Suggests": "readr, rmarkdown, spelling, testthat (>= 3.1.7)",
+        "ByteCompile": "true",
+        "Config/Needs/website": "tidyverse, tidyverse/tidytemplate",
+        "Config/testthat/edition": "3",
+        "Encoding": "UTF-8",
+        "Language": "en-US",
+        "RoxygenNote": "7.3.2.9000",
+        "NeedsCompilation": "no",
+        "Packaged": "2025-09-03 23:00:43 UTC; jenny",
+        "Author": "Jennifer Bryan [cre, aut] (ORCID:\n    <https://orcid.org/0000-0002-6983-2759>),\n  Posit Software, PBC [cph, fnd]",
+        "Maintainer": "Jennifer Bryan <jenny@posit.co>",
+        "Repository": "RSPM",
+        "Date/Publication": "2025-09-03 23:20:02 UTC",
+        "Built": "R 4.4.0; ; 2025-09-04 04:44:30 UTC; windows",
+        "RemoteType": "standard",
+        "RemotePkgRef": "googlesheets4",
+        "RemoteRef": "googlesheets4",
+        "RemoteRepos": "https://packagemanager.posit.co/cran/latest",
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "x86_64-w64-mingw32",
+        "RemoteSha": "1.1.2"
       }
     },
     "htmltools": {
@@ -658,6 +804,41 @@
         "RemoteSha": "1.6.15"
       }
     },
+    "httr": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "description": {
+        "Package": "httr",
+        "Title": "Tools for Working with URLs and HTTP",
+        "Version": "1.4.8",
+        "Authors@R": "c(\n    person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = c(\"aut\", \"cre\")),\n    person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\"))\n  )",
+        "Description": "Useful tools for working with HTTP organised by HTTP verbs\n    (GET(), POST(), etc). Configuration functions make it easy to control\n    additional request components (authenticate(), add_headers() and so\n    on).",
+        "License": "MIT + file LICENSE",
+        "URL": "https://httr.r-lib.org/, https://github.com/r-lib/httr",
+        "BugReports": "https://github.com/r-lib/httr/issues",
+        "Depends": "R (>= 3.6)",
+        "Imports": "curl (>= 5.1.0), jsonlite, mime, openssl (>= 0.8), R6",
+        "Suggests": "covr, httpuv, jpeg, knitr, png, readr, rmarkdown, testthat\n(>= 0.8.0), xml2",
+        "VignetteBuilder": "knitr",
+        "Config/Needs/website": "tidyverse/tidytemplate",
+        "Encoding": "UTF-8",
+        "RoxygenNote": "7.3.3",
+        "NeedsCompilation": "no",
+        "Packaged": "2026-02-13 13:25:45 UTC; hadleywickham",
+        "Author": "Hadley Wickham [aut, cre],\n  Posit Software, PBC [cph, fnd]",
+        "Maintainer": "Hadley Wickham <hadley@posit.co>",
+        "Repository": "CRAN",
+        "Date/Publication": "2026-02-13 16:20:15 UTC",
+        "Built": "R 4.4.3; ; 2026-03-27 20:12:30 UTC; windows",
+        "RemoteType": "standard",
+        "RemotePkgRef": "httr",
+        "RemoteRef": "httr",
+        "RemoteRepos": "https://cloud.r-project.org",
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "x86_64-w64-mingw32",
+        "RemoteSha": "1.4.8"
+      }
+    },
     "httr2": {
       "Source": "CRAN",
       "Repository": "https://packagemanager.posit.co/cran/latest",
@@ -696,6 +877,39 @@
         "RemoteSha": "1.2.2"
       }
     },
+    "ids": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "description": {
+        "Package": "ids",
+        "Title": "Generate Random Identifiers",
+        "Version": "1.0.1",
+        "Authors@R": "person(\"Rich\", \"FitzJohn\", role = c(\"aut\", \"cre\"),\n    email = \"rich.fitzjohn@gmail.com\")",
+        "Description": "Generate random or human readable and pronounceable identifiers.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://github.com/richfitz/ids",
+        "BugReports": "https://github.com/richfitz/ids/issues",
+        "Imports": "openssl, uuid",
+        "Suggests": "knitr, rcorpora, rmarkdown, testthat",
+        "RoxygenNote": "6.0.1",
+        "VignetteBuilder": "knitr",
+        "NeedsCompilation": "no",
+        "Packaged": "2017-05-31 08:43:42 UTC; rich",
+        "Author": "Rich FitzJohn [aut, cre]",
+        "Maintainer": "Rich FitzJohn <rich.fitzjohn@gmail.com>",
+        "Repository": "RSPM",
+        "Date/Publication": "2017-05-31 08:49:59 UTC",
+        "Encoding": "UTF-8",
+        "Built": "R 4.4.0; ; 2024-04-24 23:50:14 UTC; windows",
+        "RemoteType": "standard",
+        "RemotePkgRef": "ids",
+        "RemoteRef": "ids",
+        "RemoteRepos": "https://packagemanager.posit.co/cran/latest",
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "x86_64-w64-mingw32",
+        "RemoteSha": "1.0.1"
+      }
+    },
     "jquerylib": {
       "Source": "CRAN",
       "Repository": "https://packagemanager.posit.co/cran/latest",
@@ -732,7 +946,7 @@
       "Repository": "https://packagemanager.posit.co/cran/latest",
       "description": {
         "Package": "jsonlite",
-        "Version": "1.8.9",
+        "Version": "2.0.0",
         "Title": "A Simple and Robust JSON Parser and Generator for R",
         "License": "MIT + file LICENSE",
         "Depends": "methods",
@@ -743,14 +957,14 @@
         "VignetteBuilder": "knitr, R.rsp",
         "Description": "A reasonably fast JSON parser and generator, optimized for statistical \n    data and the web. Offers simple, flexible tools for working with JSON in R, and\n    is particularly powerful for building pipelines and interacting with a web API. \n    The implementation is based on the mapping described in the vignette (Ooms, 2014).\n    In addition to converting JSON data from/to R objects, 'jsonlite' contains \n    functions to stream, validate, and prettify JSON data. The unit tests included \n    with the package verify that all edge cases are encoded and decoded consistently \n    for use with dynamic data in systems and applications.",
         "Suggests": "httr, vctrs, testthat, knitr, rmarkdown, R.rsp, sf",
-        "RoxygenNote": "7.2.3",
+        "RoxygenNote": "7.3.2",
         "Encoding": "UTF-8",
         "NeedsCompilation": "yes",
-        "Packaged": "2024-09-19 15:41:06 UTC; jeroen",
+        "Packaged": "2025-03-26 11:36:10 UTC; jeroen",
         "Author": "Jeroen Ooms [aut, cre] (<https://orcid.org/0000-0002-4035-0289>),\n  Duncan Temple Lang [ctb],\n  Lloyd Hilaiel [cph] (author of bundled libyajl)",
         "Repository": "CRAN",
-        "Date/Publication": "2024-09-20 08:40:14 UTC",
-        "Built": "R 4.4.1; x86_64-w64-mingw32; 2024-11-02 01:23:06 UTC; windows",
+        "Date/Publication": "2025-03-27 06:40:02 UTC",
+        "Built": "R 4.4.3; x86_64-w64-mingw32; 2025-06-06 00:44:41 UTC; windows",
         "Archs": "x64",
         "RemoteType": "standard",
         "RemotePkgRef": "jsonlite",
@@ -758,7 +972,7 @@
         "RemoteRepos": "https://cloud.r-project.org",
         "RemoteReposName": "CRAN",
         "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.8.9"
+        "RemoteSha": "2.0.0"
       }
     },
     "later": {
@@ -971,6 +1185,77 @@
         "RemoteSha": "2.3.5"
       }
     },
+    "pillar": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "description": {
+        "Package": "pillar",
+        "Title": "Coloured Formatting for Columns",
+        "Version": "1.11.1",
+        "Authors@R": "\n    c(person(given = \"Kirill\",\n             family = \"M\\u00fcller\",\n             role = c(\"aut\", \"cre\"),\n             email = \"kirill@cynkra.com\",\n             comment = c(ORCID = \"0000-0002-1416-3412\")),\n      person(given = \"Hadley\",\n             family = \"Wickham\",\n             role = \"aut\"),\n      person(given = \"RStudio\",\n             role = \"cph\"))",
+        "Description": "Provides 'pillar' and 'colonnade' generics designed\n    for formatting columns of data using the full range of colours\n    provided by modern terminals.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://pillar.r-lib.org/, https://github.com/r-lib/pillar",
+        "BugReports": "https://github.com/r-lib/pillar/issues",
+        "Imports": "cli (>= 2.3.0), glue, lifecycle, rlang (>= 1.0.2), utf8 (>=\n1.1.0), utils, vctrs (>= 0.5.0)",
+        "Suggests": "bit64, DBI, debugme, DiagrammeR, dplyr, formattable, ggplot2,\nknitr, lubridate, nanotime, nycflights13, palmerpenguins,\nrmarkdown, scales, stringi, survival, testthat (>= 3.1.1),\ntibble, units (>= 0.7.2), vdiffr, withr",
+        "VignetteBuilder": "knitr",
+        "Encoding": "UTF-8",
+        "RoxygenNote": "7.3.3.9000",
+        "Config/testthat/edition": "3",
+        "Config/testthat/parallel": "true",
+        "Config/testthat/start-first": "format_multi_fuzz, format_multi_fuzz_2,\nformat_multi, ctl_colonnade, ctl_colonnade_1, ctl_colonnade_2",
+        "Config/autostyle/scope": "line_breaks",
+        "Config/autostyle/strict": "true",
+        "Config/gha/extra-packages": "units=?ignore-before-r=4.3.0",
+        "Config/Needs/website": "tidyverse/tidytemplate",
+        "NeedsCompilation": "no",
+        "Packaged": "2025-09-17 03:59:12 UTC; kirill",
+        "Author": "Kirill Müller [aut, cre] (ORCID:\n    <https://orcid.org/0000-0002-1416-3412>),\n  Hadley Wickham [aut],\n  RStudio [cph]",
+        "Maintainer": "Kirill Müller <kirill@cynkra.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2025-09-17 11:20:02 UTC",
+        "Built": "R 4.4.3; ; 2025-12-24 03:50:18 UTC; windows",
+        "RemoteType": "standard",
+        "RemotePkgRef": "pillar",
+        "RemoteRef": "pillar",
+        "RemoteRepos": "https://cloud.r-project.org",
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "x86_64-w64-mingw32",
+        "RemoteSha": "1.11.1"
+      }
+    },
+    "pkgconfig": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "description": {
+        "Package": "pkgconfig",
+        "Title": "Private Configuration for 'R' Packages",
+        "Version": "2.0.3",
+        "Author": "Gábor Csárdi",
+        "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
+        "Description": "Set configuration options on a per-package basis.\n    Options set by a given package only apply to that package,\n    other packages are unaffected.",
+        "License": "MIT + file LICENSE",
+        "LazyData": "true",
+        "Imports": "utils",
+        "Suggests": "covr, testthat, disposables (>= 1.0.3)",
+        "URL": "https://github.com/r-lib/pkgconfig#readme",
+        "BugReports": "https://github.com/r-lib/pkgconfig/issues",
+        "Encoding": "UTF-8",
+        "NeedsCompilation": "no",
+        "Packaged": "2019-09-22 08:42:40 UTC; gaborcsardi",
+        "Repository": "CRAN",
+        "Date/Publication": "2019-09-22 09:20:02 UTC",
+        "Built": "R 4.4.1; ; 2024-11-02 01:23:05 UTC; windows",
+        "RemoteType": "standard",
+        "RemotePkgRef": "pkgconfig",
+        "RemoteRef": "pkgconfig",
+        "RemoteRepos": "https://cloud.r-project.org",
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "x86_64-w64-mingw32",
+        "RemoteSha": "2.0.3"
+      }
+    },
     "promises": {
       "Source": "CRAN",
       "Repository": "https://packagemanager.posit.co/cran/latest",
@@ -1011,6 +1296,47 @@
         "RemoteSha": "1.3.3"
       }
     },
+    "purrr": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "description": {
+        "Package": "purrr",
+        "Title": "Functional Programming Tools",
+        "Version": "1.2.2",
+        "Authors@R": "c(\n    person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = c(\"aut\", \"cre\"),\n           comment = c(ORCID = \"0000-0003-4757-117X\")),\n    person(\"Lionel\", \"Henry\", , \"lionel@posit.co\", role = \"aut\"),\n    person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\"),\n           comment = c(ROR = \"https://ror.org/03wc8by49\"))\n  )",
+        "Description": "A complete and consistent functional programming toolkit for\n    R.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://purrr.tidyverse.org/, https://github.com/tidyverse/purrr",
+        "BugReports": "https://github.com/tidyverse/purrr/issues",
+        "Depends": "R (>= 4.1)",
+        "Imports": "cli (>= 3.6.1), lifecycle (>= 1.0.3), magrittr (>= 1.5.0),\nrlang (>= 1.1.1), vctrs (>= 0.6.3)",
+        "Suggests": "carrier (>= 0.3.0), covr, dplyr (>= 0.7.8), httr, knitr,\nlubridate, mirai (>= 2.5.1), rmarkdown, testthat (>= 3.0.0),\ntibble, tidyselect",
+        "LinkingTo": "cli",
+        "VignetteBuilder": "knitr",
+        "Biarch": "true",
+        "Config/build/compilation-database": "true",
+        "Config/Needs/website": "tidyverse/tidytemplate, tidyr",
+        "Config/testthat/edition": "3",
+        "Config/testthat/parallel": "TRUE",
+        "Encoding": "UTF-8",
+        "RoxygenNote": "7.3.3",
+        "NeedsCompilation": "yes",
+        "Packaged": "2026-04-10 10:15:54 UTC; lionel",
+        "Author": "Hadley Wickham [aut, cre] (ORCID:\n    <https://orcid.org/0000-0003-4757-117X>),\n  Lionel Henry [aut],\n  Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)",
+        "Maintainer": "Hadley Wickham <hadley@posit.co>",
+        "Repository": "RSPM",
+        "Date/Publication": "2026-04-10 17:00:09 UTC",
+        "Built": "R 4.4.0; x86_64-w64-mingw32; 2026-04-11 04:46:22 UTC; windows",
+        "Archs": "x64",
+        "RemoteType": "standard",
+        "RemotePkgRef": "purrr",
+        "RemoteRef": "purrr",
+        "RemoteRepos": "https://packagemanager.posit.co/cran/latest",
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "x86_64-w64-mingw32",
+        "RemoteSha": "1.2.2"
+      }
+    },
     "rappdirs": {
       "Source": "CRAN",
       "Repository": "https://packagemanager.posit.co/cran/latest",
@@ -1045,6 +1371,69 @@
         "RemoteReposName": "CRAN",
         "RemotePkgPlatform": "x86_64-w64-mingw32",
         "RemoteSha": "0.3.3"
+      }
+    },
+    "rematch": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "description": {
+        "Package": "rematch",
+        "Title": "Match Regular Expressions with a Nicer 'API'",
+        "Version": "2.0.0",
+        "Author": "Gabor Csardi",
+        "Maintainer": "Gabor Csardi <csardi.gabor@gmail.com>",
+        "Description": "A small wrapper on 'regexpr' to extract the matches and\n    captured groups from the match of a regular expression to a character\n    vector.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://github.com/gaborcsardi/rematch",
+        "BugReports": "https://github.com/gaborcsardi/rematch/issues",
+        "RoxygenNote": "5.0.1.9000",
+        "Suggests": "covr, testthat",
+        "Encoding": "UTF-8",
+        "NeedsCompilation": "no",
+        "Packaged": "2023-08-30 12:10:51 UTC; gaborcsardi",
+        "Repository": "CRAN",
+        "Date/Publication": "2023-08-30 16:50:02 UTC",
+        "Built": "R 4.4.2; ; 2025-01-16 01:52:37 UTC; windows",
+        "RemoteType": "standard",
+        "RemotePkgRef": "rematch",
+        "RemoteRef": "rematch",
+        "RemoteRepos": "https://cloud.r-project.org",
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "x86_64-w64-mingw32",
+        "RemoteSha": "2.0.0"
+      }
+    },
+    "rematch2": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "description": {
+        "Package": "rematch2",
+        "Title": "Tidy Output from Regular Expression Matching",
+        "Version": "2.1.2",
+        "Authors@R": "c(\n    person(\"Gábor\", \"Csárdi\", email = \"csardi.gabor@gmail.com\", role = c(\"aut\", \"cre\")),\n    person(\"Matthew\", \"Lincoln\", email = \"matthew.d.lincoln@gmail.com\", role = c(\"ctb\")))",
+        "Description": "Wrappers on 'regexpr' and 'gregexpr' to return the match\n    results in tidy data frames.",
+        "License": "MIT + file LICENSE",
+        "LazyData": "true",
+        "URL": "https://github.com/r-lib/rematch2#readme",
+        "BugReports": "https://github.com/r-lib/rematch2/issues",
+        "RoxygenNote": "7.1.0",
+        "Imports": "tibble",
+        "Suggests": "covr, testthat",
+        "Encoding": "UTF-8",
+        "NeedsCompilation": "no",
+        "Packaged": "2020-04-30 10:31:13 UTC; gaborcsardi",
+        "Author": "Gábor Csárdi [aut, cre],\n  Matthew Lincoln [ctb]",
+        "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2020-05-01 06:50:02 UTC",
+        "Built": "R 4.4.1; ; 2024-11-02 02:56:27 UTC; windows",
+        "RemoteType": "standard",
+        "RemotePkgRef": "rematch2",
+        "RemoteRef": "rematch2",
+        "RemoteRepos": "https://cloud.r-project.org",
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "x86_64-w64-mingw32",
+        "RemoteSha": "2.1.2"
       }
     },
     "renv": {
@@ -1293,6 +1682,115 @@
         "RemoteSha": "3.4.3"
       }
     },
+    "tibble": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "description": {
+        "Package": "tibble",
+        "Title": "Simple Data Frames",
+        "Version": "3.3.1",
+        "Authors@R": "c(\n    person(\"Kirill\", \"Müller\", , \"kirill@cynkra.com\", role = c(\"aut\", \"cre\"),\n           comment = c(ORCID = \"0000-0002-1416-3412\")),\n    person(\"Hadley\", \"Wickham\", , \"hadley@rstudio.com\", role = \"aut\"),\n    person(\"Romain\", \"Francois\", , \"romain@r-enthusiasts.com\", role = \"ctb\"),\n    person(\"Jennifer\", \"Bryan\", , \"jenny@rstudio.com\", role = \"ctb\"),\n    person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\"),\n           comment = c(ROR = \"03wc8by49\"))\n  )",
+        "Description": "Provides a 'tbl_df' class (the 'tibble') with stricter\n    checking and better formatting than the traditional data frame.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble",
+        "BugReports": "https://github.com/tidyverse/tibble/issues",
+        "Depends": "R (>= 3.4.0)",
+        "Imports": "cli, lifecycle (>= 1.0.0), magrittr, methods, pillar (>=\n1.8.1), pkgconfig, rlang (>= 1.0.2), utils, vctrs (>= 0.5.0)",
+        "Suggests": "bench, bit64, blob, brio, callr, DiagrammeR, dplyr, evaluate,\nformattable, ggplot2, here, hms, htmltools, knitr, lubridate,\nnycflights13, pkgload, purrr, rmarkdown, stringi, testthat (>=\n3.0.2), tidyr, withr",
+        "VignetteBuilder": "knitr",
+        "Config/autostyle/rmd": "false",
+        "Config/autostyle/scope": "line_breaks",
+        "Config/autostyle/strict": "true",
+        "Config/Needs/website": "tidyverse/tidytemplate",
+        "Config/testthat/edition": "3",
+        "Config/testthat/parallel": "true",
+        "Config/testthat/start-first": "vignette-formats, as_tibble, add,\ninvariants",
+        "Config/usethis/last-upkeep": "2025-06-07",
+        "Encoding": "UTF-8",
+        "RoxygenNote": "7.3.3.9000",
+        "NeedsCompilation": "yes",
+        "Packaged": "2026-01-10 18:28:47 UTC; kirill",
+        "Author": "Kirill Müller [aut, cre] (ORCID:\n    <https://orcid.org/0000-0002-1416-3412>),\n  Hadley Wickham [aut],\n  Romain Francois [ctb],\n  Jennifer Bryan [ctb],\n  Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)",
+        "Maintainer": "Kirill Müller <kirill@cynkra.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2026-01-11 10:10:02 UTC",
+        "Built": "R 4.4.3; x86_64-w64-mingw32; 2026-03-23 03:41:39 UTC; windows",
+        "Archs": "x64",
+        "RemoteType": "standard",
+        "RemotePkgRef": "tibble",
+        "RemoteRef": "tibble",
+        "RemoteRepos": "https://cloud.r-project.org",
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "x86_64-w64-mingw32",
+        "RemoteSha": "3.3.1"
+      }
+    },
+    "utf8": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "description": {
+        "Package": "utf8",
+        "Title": "Unicode Text Processing",
+        "Version": "1.2.6",
+        "Authors@R": "\n    c(person(given = c(\"Patrick\", \"O.\"),\n             family = \"Perry\",\n             role = c(\"aut\", \"cph\")),\n      person(given = \"Kirill\",\n             family = \"M\\u00fcller\",\n             role = \"cre\",\n             email = \"kirill@cynkra.com\",\n             comment = c(ORCID = \"0000-0002-1416-3412\")),\n      person(given = \"Unicode, Inc.\",\n             role = c(\"cph\", \"dtc\"),\n             comment = \"Unicode Character Database\"))",
+        "Description": "Process and print 'UTF-8' encoded international\n    text (Unicode). Input, validate, normalize, encode, format, and\n    display.",
+        "License": "Apache License (== 2.0) | file LICENSE",
+        "URL": "https://krlmlr.github.io/utf8/, https://github.com/krlmlr/utf8",
+        "BugReports": "https://github.com/krlmlr/utf8/issues",
+        "Depends": "R (>= 2.10)",
+        "Suggests": "cli, covr, knitr, rlang, rmarkdown, testthat (>= 3.0.0),\nwithr",
+        "VignetteBuilder": "knitr, rmarkdown",
+        "Config/testthat/edition": "3",
+        "Encoding": "UTF-8",
+        "RoxygenNote": "7.3.2.9000",
+        "NeedsCompilation": "yes",
+        "Packaged": "2025-06-08 18:28:11 UTC; kirill",
+        "Author": "Patrick O. Perry [aut, cph],\n  Kirill Müller [cre] (ORCID: <https://orcid.org/0000-0002-1416-3412>),\n  Unicode, Inc. [cph, dtc] (Unicode Character Database)",
+        "Maintainer": "Kirill Müller <kirill@cynkra.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2025-06-08 19:00:02 UTC",
+        "Built": "R 4.4.3; x86_64-w64-mingw32; 2025-06-08 23:50:53 UTC; windows",
+        "Archs": "x64",
+        "RemoteType": "standard",
+        "RemotePkgRef": "utf8",
+        "RemoteRef": "utf8",
+        "RemoteRepos": "https://cloud.r-project.org",
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "x86_64-w64-mingw32",
+        "RemoteSha": "1.2.6"
+      }
+    },
+    "uuid": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "description": {
+        "Package": "uuid",
+        "Version": "1.2-2",
+        "Title": "Tools for Generating and Handling of UUIDs",
+        "Author": "Simon Urbanek [aut, cre, cph] (https://urbanek.org, ORCID:\n    <https://orcid.org/0000-0003-2297-1732>),\n  Theodore Ts'o [aut, cph] (libuuid)",
+        "Maintainer": "Simon Urbanek <Simon.Urbanek@r-project.org>",
+        "Authors@R": "c(person(\"Simon\", \"Urbanek\", role=c(\"aut\",\"cre\",\"cph\"), email=\"Simon.Urbanek@r-project.org\", comment=c(\"https://urbanek.org\", ORCID=\"0000-0003-2297-1732\")), person(\"Theodore\",\"Ts'o\", email=\"tytso@thunk.org\", role=c(\"aut\",\"cph\"), comment=\"libuuid\"))",
+        "Depends": "R (>= 2.9.0)",
+        "Description": "Tools for generating and handling of UUIDs (Universally Unique Identifiers).",
+        "License": "MIT + file LICENSE",
+        "URL": "https://www.rforge.net/uuid",
+        "BugReports": "https://github.com/s-u/uuid/issues",
+        "NeedsCompilation": "yes",
+        "Packaged": "2026-01-23 00:09:28 UTC; rforge",
+        "Repository": "RSPM",
+        "Date/Publication": "2026-01-23 06:40:09 UTC",
+        "Encoding": "UTF-8",
+        "Built": "R 4.4.0; x86_64-w64-mingw32; 2026-01-24 04:35:26 UTC; windows",
+        "Archs": "x64",
+        "RemoteType": "standard",
+        "RemotePkgRef": "uuid",
+        "RemoteRef": "uuid",
+        "RemoteRepos": "https://packagemanager.posit.co/cran/latest",
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "x86_64-w64-mingw32",
+        "RemoteSha": "1.2-2"
+      }
+    },
     "vctrs": {
       "Source": "CRAN",
       "Repository": "https://packagemanager.posit.co/cran/latest",
@@ -1405,40 +1903,28 @@
   },
   "files": {
     ".Rprofile": {
-      "checksum": "3f69dcf4f34228c7f1eebed3e68c841d"
+      "checksum": "c21cf9d738a65aa38b7a41b04675ad4b"
     },
     "app.R": {
-      "checksum": "50c3e0c48247f76674590acadae7e08c"
-    },
-    "data/establishment_name.csv": {
-      "checksum": "9d722fe0ce24496dcf1a8af9de950b5d"
-    },
-    "data/establishment_type.csv": {
-      "checksum": "a95cc27f6a6268e8d488d34e4cb95431"
-    },
-    "data/purchase_content.csv": {
-      "checksum": "d6f5df7ce1e34f7ff186c4ed11cc550a"
-    },
-    "data/purchase_type.csv": {
-      "checksum": "20e1435dfa0459af25c39248a4d2cedf"
+      "checksum": "a53237926b5eead8b2ac46089eb61eed"
     },
     "funcs/fct_custom_select.R": {
       "checksum": "4b76b75566a525682dcbb5c9a9b9abd5"
     },
+    "funcs/fct_gs_auth.R": {
+      "checksum": "62f72606298203bbbaa1df192d2e4de7"
+    },
     "funcs/fct_update_cats.R": {
-      "checksum": "a5cccbeec39d05fe691ded04f6aca8be"
+      "checksum": "d7511378e8ed7b73ce014f4e2900753b"
     },
     "renv.lock": {
-      "checksum": "16fde7d2c0ce1f2ccdfe14feaf997446"
-    },
-    "TODO.txt": {
-      "checksum": "1a66109ff7ed663f42cb581f00073158"
+      "checksum": "bc3d544ea7686e832c22118dda95dfa4"
     },
     "www/app.js": {
-      "checksum": "a218c3364831225028e4153a257aa792"
+      "checksum": "32fa14a939c9883e4f7ba1002868d914"
     },
     "www/styles.css": {
-      "checksum": "2204932e1836194a91b5fd1b5338b80f"
+      "checksum": "5d71aa334f6f41b32979e42fba215b9d"
     }
   },
   "users": null
