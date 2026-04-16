@@ -47,3 +47,16 @@ $(document).on('focus', '.selectize-input input, #purchase_date', function() {
     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }, 300); // delay lets the keyboard animate up first
 });
+
+// ── When dropdown opens, scroll its bottom into view (above keyboard) ──
+$(document).on('focus', '.selectize-input input', function() {
+  var ctrl = $(this).closest('.selectize-control');
+  setTimeout(function() {
+    var dropdown = ctrl.find('.selectize-dropdown');
+    if (dropdown.length && dropdown.is(':visible')) {
+      dropdown[0].scrollIntoView({ behavior: 'smooth', block: 'end' });
+    } else {
+      ctrl[0].scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+  }, 350);
+});
