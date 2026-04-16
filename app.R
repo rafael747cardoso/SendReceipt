@@ -326,6 +326,11 @@ server <- function(input, output, session) {
     photo_path <- input$receipt_photo$datapath
     photo_b64  <- base64enc::base64encode(photo_path)
     
+    cat("=== DEBUG ===\n")
+    cat("KEY length:", nchar(Sys.getenv("RESEND_API_KEY")), "\n")
+    cat("TO value:", Sys.getenv("RESEND_TO_EMAIL"), "\n")
+    cat("TO length:", nchar(Sys.getenv("RESEND_TO_EMAIL")), "\n")
+    
     #### API request ----
     body <- list(
       from    = "onboarding@resend.dev",
@@ -340,13 +345,21 @@ server <- function(input, output, session) {
         )
       )
     )
-    resp <- httr2::request("https://api.resend.com/emails") |>
-      httr2::req_headers(
-        Authorization = paste("Bearer", Sys.getenv("RESEND_API_KEY")),
-        `Content-Type` = "application/json"
-      ) |>
-      httr2::req_body_json(body) |>
-      httr2::req_perform()
+    
+    resp <- tryCatch(
+      httr2::request("https://api.resend.com/emails") |>
+        httr2::req_headers(
+          Authorization = paste("Bearer", Sys.getenv("RESEND_API_KEY")),
+          `Content-Type` = "application/json"
+        ) |>
+        httr2::req_body_json(body) |>
+        httr2::req_error(is_error = function(resp) FALSE) |>
+        httr2::req_perform(),
+      error = function(e) e
+    )
+    
+    cat("Status:", httr2::resp_status(resp), "\n")
+    cat("Body:", httr2::resp_body_string(resp), "\n")
     
     #### Response status ----
     if (httr2::resp_status(resp) == 200) {
