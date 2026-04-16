@@ -70,7 +70,7 @@ function scrollAboveKeyboard(targetEl) {
   }
 }
 
-$(document).on('focus', '.selectize-input input, #purchase_date', function() {
+$(document).on('focus click', '.selectize-input input, #purchase_date', function() {
   var isDate = this.id === 'purchase_date';
   var ctrl = $(this).closest('.selectize-control');
   setTimeout(function() {
@@ -106,3 +106,17 @@ if (window.visualViewport) {
     setTimeout(function() { scrollAboveKeyboard(target); }, 100);
   });
 }
+
+// ── Prevent soft keyboard on datepicker ──
+function makeDateReadonly() {
+  var el = document.getElementById('purchase_date');
+  if (el) {
+    el.setAttribute('readonly', 'readonly');
+    el.setAttribute('inputmode', 'none');
+  } else {
+    setTimeout(makeDateReadonly, 200);
+  }
+}
+$(document).on('shiny:connected', makeDateReadonly);
+setTimeout(makeDateReadonly, 500);
+
