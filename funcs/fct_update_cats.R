@@ -26,3 +26,4 @@ fct_update_cats <- function(input_cat, var_name, r, session) {
   }    
   
 }
+
