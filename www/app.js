@@ -107,10 +107,8 @@ if (window.visualViewport) {
   });
 }
 
-// ── Dismiss soft keyboard when datepicker opens ──
-$(document).on('focus click', '#purchase_date', function() {
-  setTimeout(function() {
-    document.activeElement.blur();
-  }, 100);
+// ── Prevent soft keyboard on datepicker (use calendar only) ──
+$(document).on('shiny:connected', function() {
+  $('#purchase_date').attr('readonly', true);
 });
 
