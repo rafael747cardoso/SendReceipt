@@ -6,6 +6,7 @@ $(document).on('focus', '.selectize-input input', function() {
   ctrl.addClass('focus-blur-active');
   activeSelectId = ctrl.closest('.form-group').find('select, input[id]').attr('id');
 });
+
 $(document).on('shiny:inputchanged', function(e) {
   if (!activeSelectId) return;
   if (e.name !== activeSelectId) return;
@@ -14,6 +15,7 @@ $(document).on('shiny:inputchanged', function(e) {
   document.activeElement.blur();
   activeSelectId = null;
 });
+
 $(document).on('mousedown touchstart', function(e) {
   if (!$(e.target).closest('.selectize-control').length) {
     $('.selectize-control').removeClass('focus-blur-active');
@@ -26,12 +28,14 @@ $(document).on('mousedown touchstart', function(e) {
 $(document).on('focus', '#purchase_date', function() {
   $('body').addClass('datepicker-blur');
 });
+
 $(document).on('shiny:inputchanged', function(e) {
   if (e.name === 'purchase_date') {
     $('body').removeClass('datepicker-blur');
     document.activeElement.blur();
   }
 });
+
 $(document).on('mousedown touchstart', function(e) {
   if ($('body').hasClass('datepicker-blur') &&
       !$(e.target).closest('#purchase_date, .datepicker, .datepicker--container, .air-datepicker, .air-datepicker-global-container').length) {
@@ -40,11 +44,10 @@ $(document).on('mousedown touchstart', function(e) {
   }
 });
 
-// ── Scroll dropdown into visible area above keyboard ──
+// ── Scroll dropdown/calendar into visible area above keyboard ──
 function scrollAboveKeyboard(targetEl) {
   var vh = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
   var vTop = (window.visualViewport && window.visualViewport.offsetTop) || 0;
-
   var rect = targetEl.getBoundingClientRect();
   var elHeight = rect.height;
   var elTop = rect.top;
@@ -68,10 +71,17 @@ function scrollAboveKeyboard(targetEl) {
 }
 
 $(document).on('focus', '.selectize-input input, #purchase_date', function() {
+  var isDate = this.id === 'purchase_date';
   var ctrl = $(this).closest('.selectize-control');
   setTimeout(function() {
-    var dropdown = ctrl.find('.selectize-dropdown');
-    var target = (dropdown.length && dropdown.is(':visible')) ? dropdown[0] : ctrl[0];
+    var target;
+    if (isDate) {
+      var cal = $('.datepickers-container .datepicker, .air-datepicker-global-container .datepicker, .datepicker--container').filter(':visible').first();
+      target = cal.length ? cal[0] : document.activeElement;
+    } else {
+      var dropdown = ctrl.find('.selectize-dropdown');
+      target = (dropdown.length && dropdown.is(':visible')) ? dropdown[0] : ctrl[0];
+    }
     scrollAboveKeyboard(target);
   }, 600);
 });
@@ -79,12 +89,20 @@ $(document).on('focus', '.selectize-input input, #purchase_date', function() {
 if (window.visualViewport) {
   window.visualViewport.addEventListener('resize', function() {
     var active = document.activeElement;
-    if (active && (active.matches('.selectize-input input') || active.id === 'purchase_date')) {
+    if (!active) return;
+    var isSelectize = active.matches('.selectize-input input');
+    var isDate = active.id === 'purchase_date';
+    if (!isSelectize && !isDate) return;
+
+    var target;
+    if (isDate) {
+      var cal = $('.datepickers-container .datepicker, .air-datepicker-global-container .datepicker, .datepicker--container').filter(':visible').first();
+      target = cal.length ? cal[0] : active;
+    } else {
       var ctrl = $(active).closest('.selectize-control');
       var dropdown = ctrl.find('.selectize-dropdown');
-      var target = (dropdown.length && dropdown.is(':visible')) ? dropdown[0] : ctrl[0];
-      setTimeout(function() { scrollAboveKeyboard(target); }, 100);
+      target = (dropdown.length && dropdown.is(':visible')) ? dropdown[0] : ctrl[0];
     }
+    setTimeout(function() { scrollAboveKeyboard(target); }, 100);
   });
 }
-
