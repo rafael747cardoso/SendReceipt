@@ -9,12 +9,12 @@ fct_update_cats <- function(input_cat, var_name, r, session) {
     ### Update options ----
     r[[paste0("opts_", var_name)]] <- sort(c(r[[paste0("opts_", var_name)]], val))
     
-    ### Append CSV with new option ----
-    data.table::fwrite(
-      x = data.table::data.table(category = r[[paste0("opts_", var_name)]]),
-      file = paste0("data/", var_name, ".csv"),
-      quote = TRUE
-    )      
+    ### Write to Google Sheet ----
+    googlesheets4::write_sheet(
+      data  = data.table::data.table(category = r[[paste0("opts_", var_name)]]),
+      ss    = Sys.getenv("GS_SHEET_ID"),
+      sheet = var_name
+    )
     
     ### Update selected ----
     shiny::updateSelectizeInput(

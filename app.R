@@ -1,9 +1,17 @@
 
+# dev = TRUE
+# master = FALSE
+test_mode <- TRUE
+
 # Load functions ----
 lapply(list.files("funcs", pattern = "\\.R$", full.names = TRUE), source)
 
-test_mode <- TRUE
+# Auth Google Sheets ----
+fct_gs_auth()
+gs_id <- Sys.getenv("GS_SHEET_ID")
 
+
+############################################################################
 # Frontend ----
 ui <- shiny::fluidPage(
   
@@ -83,15 +91,16 @@ ui <- shiny::fluidPage(
   
 )
 
+############################################################################
 # Backend ----
 server <- function(input, output, session) {
   
-  ## Read categories from repo data ----
+  ## Read categories from Google Sheets ----
   r <- shiny::reactiveValues()
-  r$opts_establishment_type <- data.table::fread("data/establishment_type.csv")$category
-  r$opts_establishment_name <- data.table::fread("data/establishment_name.csv")
-  r$opts_purchase_type      <- data.table::fread("data/purchase_type.csv")
-  r$opts_purchase_content   <- data.table::fread("data/purchase_content.csv")$category
+  r$opts_establishment_type <- googlesheets4::read_sheet(gs_id, sheet = "establishment_type")$category
+  r$opts_establishment_name <- data.table::as.data.table(googlesheets4::read_sheet(gs_id, sheet = "establishment_name"))
+  r$opts_purchase_type      <- data.table::as.data.table(googlesheets4::read_sheet(gs_id, sheet = "purchase_type"))
+  r$opts_purchase_content   <- googlesheets4::read_sheet(gs_id, sheet = "purchase_content")$category
   
   ## Build dropdowns ----
   
@@ -158,11 +167,11 @@ server <- function(input, output, session) {
       r$opts_establishment_name <- rbind(r$opts_establishment_name, new_row)
       r$opts_establishment_name <- r$opts_establishment_name[order(name)]
       
-      ## Append CSV ----
-      data.table::fwrite(
-        x = r$opts_establishment_name,
-        file = "data/establishment_name.csv",
-        quote = TRUE
+      ## Write to Google Sheet ----
+      googlesheets4::write_sheet(
+        data  = r$opts_establishment_name,
+        ss    = gs_id,
+        sheet = "establishment_name"
       )
       
       ## Update dropdown with filtered names ----
@@ -197,11 +206,11 @@ server <- function(input, output, session) {
       r$opts_purchase_type <- rbind(r$opts_purchase_type, new_row)
       r$opts_purchase_type <- r$opts_purchase_type[order(purchase)]
       
-      ## Append CSV ----
-      data.table::fwrite(
-        x = r$opts_purchase_type,
-        file = "data/purchase_type.csv",
-        quote = TRUE
+      ## Write to Google Sheet ----
+      googlesheets4::write_sheet(
+        data  = r$opts_purchase_type,
+        ss    = gs_id,
+        sheet = "purchase_type"
       )
       
       filtered <- r$opts_purchase_type[type == current_type]$purchase
@@ -268,7 +277,7 @@ server <- function(input, output, session) {
     list(
       src = input$receipt_photo$datapath,
       contentType = input$receipt_photo$type,
-      width = 800,
+      width = 400,
       height = "auto"
     )
     
@@ -295,7 +304,7 @@ server <- function(input, output, session) {
     }
     
     ### Build file name ----
-    # "timestampe; purch-date; estab-type; estab-name; purch-type; purch-content"
+    # "timestamp; purch-date; estab-type; estab-name; purch-type; purch-content"
     
     #### Timestamp ----
     photo_name <- format(Sys.time(), "%Y%m%d_%H%M%S")
