@@ -40,23 +40,28 @@ $(document).on('mousedown touchstart', function(e) {
   }
 });
 
-// ── Scroll active input into view when keyboard opens ──
-$(document).on('focus', '.selectize-input input, #purchase_date', function() {
-  var el = this;
-  setTimeout(function() {
-    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }, 300); // delay lets the keyboard animate up first
-});
+// ── Scroll dropdown into visible area above keyboard ──
+function scrollAboveKeyboard(targetEl) {
+  // Estimate keyboard height as ~45% of viewport on mobile
+  var vh = window.innerHeight;
+  var keyboardEstimate = vh * 0.45;
+  var visibleArea = vh - keyboardEstimate;
 
-// ── When dropdown opens, scroll its bottom into view (above keyboard) ──
-$(document).on('focus', '.selectize-input input', function() {
+  var rect = targetEl.getBoundingClientRect();
+  var targetBottom = rect.bottom;
+
+  // If element extends below the keyboard line, scroll up by the overflow
+  if (targetBottom > visibleArea) {
+    var scrollBy = targetBottom - visibleArea + 20; // 20px padding
+    window.scrollBy({ top: scrollBy, behavior: 'smooth' });
+  }
+}
+
+$(document).on('focus', '.selectize-input input, #purchase_date', function() {
   var ctrl = $(this).closest('.selectize-control');
   setTimeout(function() {
     var dropdown = ctrl.find('.selectize-dropdown');
-    if (dropdown.length && dropdown.is(':visible')) {
-      dropdown[0].scrollIntoView({ behavior: 'smooth', block: 'end' });
-    } else {
-      ctrl[0].scrollIntoView({ behavior: 'smooth', block: 'end' });
-    }
-  }, 350);
+    var target = (dropdown.length && dropdown.is(':visible')) ? dropdown[0] : ctrl[0] || document.activeElement;
+    scrollAboveKeyboard(target);
+  }, 400);
 });
