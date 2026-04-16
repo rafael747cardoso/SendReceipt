@@ -39,3 +39,11 @@ $(document).on('mousedown touchstart', function(e) {
     document.activeElement.blur();
   }
 });
+
+// ── Scroll active input into view when keyboard opens ──
+$(document).on('focus', '.selectize-input input, #purchase_date', function() {
+  var el = this;
+  setTimeout(function() {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 300); // delay lets the keyboard animate up first
+});
