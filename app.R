@@ -2,6 +2,8 @@
 # Load functions ----
 lapply(list.files("funcs", pattern = "\\.R$", full.names = TRUE), source)
 
+test_mode <- TRUE
+
 # Frontend ----
 ui <- shiny::fluidPage(
   
@@ -14,7 +16,10 @@ ui <- shiny::fluidPage(
     shiny::tags$script(src = "app.js")
   ),
   
-  shiny::div(class = "title-panel", shiny::titlePanel("Receipt uploader")),
+  shiny::div(
+    class = "title-panel", 
+    shiny::titlePanel(paste0("Receipt uploader", ifelse(test_mode, " - TEST", "")))
+  ),
   
   ## Upload photo ----
   shiny::fileInput(
@@ -325,7 +330,7 @@ server <- function(input, output, session) {
     body <- list(
       from    = "onboarding@resend.dev",
       to = list(Sys.getenv("RESEND_TO_EMAIL")),
-      subject = paste0("[RECEIPT] ", photo_name),
+      subject = paste0(ifelse(test_mode, "[TEST] ", "[RECEIPT] "), photo_name),
       text    = photo_name,
       attachments = list(
         list(
