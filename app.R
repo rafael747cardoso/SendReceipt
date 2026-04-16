@@ -1,7 +1,7 @@
 
 # dev = TRUE
 # master = FALSE
-test_mode <- TRUE
+test_mode <- FALSE
 
 # Load functions ----
 lapply(list.files("funcs", pattern = "\\.R$", full.names = TRUE), source)
