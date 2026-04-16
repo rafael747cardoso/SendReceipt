@@ -106,3 +106,11 @@ if (window.visualViewport) {
     setTimeout(function() { scrollAboveKeyboard(target); }, 100);
   });
 }
+
+// ── Dismiss soft keyboard when datepicker opens ──
+$(document).on('focus click', '#purchase_date', function() {
+  setTimeout(function() {
+    document.activeElement.blur();
+  }, 100);
+});
+
