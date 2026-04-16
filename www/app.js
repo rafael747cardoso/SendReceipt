@@ -70,7 +70,7 @@ function scrollAboveKeyboard(targetEl) {
   }
 }
 
-$(document).on('focus', '.selectize-input input, #purchase_date', function() {
+$(document).on('focus click', '.selectize-input input, #purchase_date', function() {
   var isDate = this.id === 'purchase_date';
   var ctrl = $(this).closest('.selectize-control');
   setTimeout(function() {
