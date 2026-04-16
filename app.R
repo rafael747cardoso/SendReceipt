@@ -18,7 +18,8 @@ ui <- shiny::fluidPage(
   
   shiny::div(
     class = "title-panel", 
-    shiny::titlePanel(paste0("Receipt uploader", ifelse(test_mode, " - TEST", "")))
+    shiny::titlePanel(paste0("Receipt uploader", 
+                             ifelse(test_mode, paste(" - TEST ", Sys.time()), "")))
   ),
   
   ## Upload photo ----

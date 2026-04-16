@@ -42,26 +42,37 @@ $(document).on('mousedown touchstart', function(e) {
 
 // ── Scroll dropdown into visible area above keyboard ──
 function scrollAboveKeyboard(targetEl) {
-  // Estimate keyboard height as ~45% of viewport on mobile
-  var vh = window.innerHeight;
-  var keyboardEstimate = vh * 0.45;
-  var visibleArea = vh - keyboardEstimate;
+  // Use VisualViewport API for accurate visible height with keyboard open
+  var vh = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
 
   var rect = targetEl.getBoundingClientRect();
   var targetBottom = rect.bottom;
 
-  // If element extends below the keyboard line, scroll up by the overflow
-  if (targetBottom > visibleArea) {
-    var scrollBy = targetBottom - visibleArea + 20; // 20px padding
+  if (targetBottom > vh) {
+    var scrollBy = targetBottom - vh + 30; // 30px padding
     window.scrollBy({ top: scrollBy, behavior: 'smooth' });
   }
 }
 
 $(document).on('focus', '.selectize-input input, #purchase_date', function() {
   var ctrl = $(this).closest('.selectize-control');
+  // Wait longer so keyboard is fully open AND visualViewport has updated
   setTimeout(function() {
     var dropdown = ctrl.find('.selectize-dropdown');
-    var target = (dropdown.length && dropdown.is(':visible')) ? dropdown[0] : ctrl[0] || document.activeElement;
+    var target = (dropdown.length && dropdown.is(':visible')) ? dropdown[0] : ctrl[0];
     scrollAboveKeyboard(target);
-  }, 400);
+  }, 600);
 });
+
+// Also re-scroll if viewport changes (e.g., keyboard finishes animating)
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', function() {
+    var active = document.activeElement;
+    if (active && (active.matches('.selectize-input input') || active.id === 'purchase_date')) {
+      var ctrl = $(active).closest('.selectize-control');
+      var dropdown = ctrl.find('.selectize-dropdown');
+      var target = (dropdown.length && dropdown.is(':visible')) ? dropdown[0] : ctrl[0];
+      setTimeout(function() { scrollAboveKeyboard(target); }, 100);
+    }
+  });
+}
