@@ -1,8 +1,6 @@
 
-# dev is  TRUE
-# master is FALSE
-test_mode <- FALSE
-
+# Test mode ----
+test_mode <- Sys.getenv("TEST_MODE", "FALSE") == "TRUE"
 
 # Load functions ----
 lapply(list.files("funcs", pattern = "\\.R$", full.names = TRUE), source)
