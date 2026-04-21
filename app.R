@@ -371,6 +371,15 @@ server <- function(input, output, session) {
         text = "Receipt emailed successfully.",
         type = "success"
       )
+      
+      ## Reset form ----
+      session$sendCustomMessage("resetDatepicker", format(Sys.Date(), "%Y-%m-%d"))
+      shiny::updateSelectizeInput(session, "establishment_type", selected = "")
+      shiny::updateSelectizeInput(session, "establishment_name", selected = "")
+      shiny::updateSelectizeInput(session, "purchase_type", selected = "")
+      shiny::updateSelectizeInput(session, "purchase_content", selected = "")
+      session$sendCustomMessage("resetFileInput", "receipt_photo")
+      
     } else {
       shinyWidgets::sendSweetAlert(
         session = session,

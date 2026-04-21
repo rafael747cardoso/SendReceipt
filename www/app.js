@@ -120,3 +120,32 @@ function makeDateReadonly() {
 $(document).on('shiny:connected', makeDateReadonly);
 setTimeout(makeDateReadonly, 500);
 
+// ── Reset file input after send ──
+Shiny.addCustomMessageHandler('resetFileInput', function(id) {
+  // Clear the file input value
+  $('#' + id).val('');
+  
+  // Reset the filename text
+  $('#' + id).closest('.input-group').find('input.form-control').val('').attr('placeholder', 'Nothing selected');
+  
+  // Hide progress bar
+  $('#' + id + '_progress').css('visibility', 'hidden');
+  $('#' + id + '_progress .progress-bar').css('width', '0%').text('');
+  
+  // Clear photo preview
+  $('#uploaded_photo img').attr('src', '').hide();
+  
+  // Tell Shiny the input is null
+  Shiny.setInputValue(id, null);
+});
+
+// ── Reset datepicker to today ──
+Shiny.addCustomMessageHandler('resetDatepicker', function(today) {
+  var el = document.getElementById('purchase_date');
+  if (el) {
+    el.value = today;
+    $(el).trigger('change');
+    Shiny.setInputValue('purchase_date', today);
+  }
+});
+
