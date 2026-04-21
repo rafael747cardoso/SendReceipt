@@ -1,7 +1,7 @@
 
 # dev is  TRUE
 # master is FALSE
-test_mode <- TRUE
+test_mode <- FALSE
 
 
 # Load functions ----
