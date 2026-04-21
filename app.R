@@ -1,7 +1,8 @@
 
-# dev = TRUE
-# master = FALSE
-test_mode <- FALSE
+# dev is  TRUE
+# master is FALSE
+test_mode <- TRUE
+
 
 # Load functions ----
 lapply(list.files("funcs", pattern = "\\.R$", full.names = TRUE), source)
