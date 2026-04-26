@@ -182,3 +182,33 @@ Shiny.addCustomMessageHandler('resetDatepicker', function(today) {
     Shiny.setInputValue('purchase_date', today);
   }
 });
+
+// ── Disable send button until required fields are filled ──
+function checkSendButton() {
+  var hasPhoto = $('#receipt_photo_progress .progress-bar').text().indexOf('complete') >= 0;
+  var dateVal = $('#purchase_date').val();
+  var estType = $('#establishment_type').val() || ($('#establishment_type + .selectize-control .item').length > 0);
+  var estName = $('#establishment_name + .selectize-control .item').length > 0 || ($('#establishment_name').val() && $('#establishment_name').val() !== '');
+  var purchType = $('#purchase_type + .selectize-control .item').length > 0 || ($('#purchase_type').val() && $('#purchase_type').val() !== '');
+
+  var ready = hasPhoto && dateVal && estType && estName && purchType;
+
+  var btn = $('.bttn-fill.bttn-primary');
+  if (ready) {
+    btn.prop('disabled', false).css('opacity', '1');
+  } else {
+    btn.prop('disabled', true).css('opacity', '0.35');
+  }
+}
+
+$(document).on('shiny:inputchanged', function() {
+  setTimeout(checkSendButton, 100);
+});
+
+$(document).on('shiny:value', function() {
+  setTimeout(checkSendButton, 300);
+});
+
+$(document).on('shiny:connected', function() {
+  setTimeout(checkSendButton, 500);
+});
