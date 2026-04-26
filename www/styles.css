@@ -31,12 +31,19 @@ body {
 .form-group.shiny-input-container:has(.btn-file):hover {
   border-color: rgba(255, 255, 255, 0.25);
 }
+
+/* ── Photo display box ── */
+#uploaded_photo {
+  max-height: 200px;
+  overflow-y: auto;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
 #uploaded_photo img {
   width: 100% !important;
   height: auto !important;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  margin-bottom: 8px;
 }
 
 /* ── Dividers ── */
@@ -201,33 +208,19 @@ body.datepicker-blur .datepicker--container {
 /* ── Mobile keyboard handling ── */
 @media (max-width: 600px) {
   body {
-    padding-bottom: 40vh; /* leaves room so bottom inputs don't hide behind keyboard */
+    padding-bottom: 60vh; /* leaves room so bottom inputs don't hide behind keyboard */
   }
   .inline-select .selectize-input,
   .inline-select input[type="text"].form-control {
     font-size: 16px !important; /* prevents iOS Safari from zooming in */
   }
 }
-
-/* ── Datepicker mobile fix ── */
+/* ── Datepicker mobile fix: open above ── */
 @media (max-width: 600px) {
-  .datepickers-container {
+  .datepickers-container,
+  .air-datepicker-global-container {
     width: 100vw !important;
     max-width: 100vw !important;
-  }
-  .datepicker,
-  .datepicker--container,
-  .air-datepicker {
-    max-width: 92vw !important;
-  }
-}
-
-@media (max-width: 600px) {
-  .datepickers-container {
-    width: 100vw !important;
-    max-width: 100vw !important;
-    left: 0 !important;
-    right: 0 !important;
   }
   .datepicker,
   .datepicker--container,
@@ -236,5 +229,7 @@ body.datepicker-blur .datepicker--container {
     left: 4vw !important;
     right: auto !important;
   }
+  .air-datepicker-global-container .datepicker {
+    transform: translateY(-100%) translateY(-50px) !important;
+  }
 }
-

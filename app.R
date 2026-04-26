@@ -57,7 +57,8 @@ ui <- shiny::fluidPage(
       addon = "none",
       value = Sys.Date(),
       width = "100%",
-      autoClose = TRUE
+      autoClose = TRUE,
+      position = "top center"
     )
   ),
   shiny::tags$hr(),

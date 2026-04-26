@@ -32,7 +32,12 @@ $(document).on('focus', '#purchase_date', function() {
 $(document).on('shiny:inputchanged', function(e) {
   if (e.name === 'purchase_date') {
     $('body').removeClass('datepicker-blur');
+    // Preserve scroll position so page doesn't jump to top
+    var scrollPos = window.scrollY;
     document.activeElement.blur();
+    requestAnimationFrame(function() {
+      window.scrollTo(0, scrollPos);
+    });
   }
 });
 
@@ -53,16 +58,13 @@ function scrollAboveKeyboard(targetEl) {
   var elTop = rect.top;
   var elBottom = rect.bottom;
 
-  // If element fits entirely in viewport, do nothing
   if (elTop >= vTop && elBottom <= vh) return;
 
-  // If element is taller than viewport, align its top with viewport top
   if (elHeight > (vh - vTop)) {
     window.scrollBy({ top: elTop - vTop - 10, behavior: 'smooth' });
     return;
   }
 
-  // Otherwise, scroll just enough so bottom clears keyboard
   if (elBottom > vh) {
     window.scrollBy({ top: elBottom - vh + 20, behavior: 'smooth' });
   } else if (elTop < vTop) {
@@ -86,6 +88,26 @@ $(document).on('focus click', '.selectize-input input, #purchase_date', function
   }, 600);
 });
 
+// ── Backup: scroll calendar into view on click with longer delay ──
+$(document).on('click', '#purchase_date', function() {
+  setTimeout(function() {
+    var cal = $('[class*="datepicker"]').filter(':visible').not('#purchase_date').first();
+    if (cal.length) {
+      scrollAboveKeyboard(cal[0]);
+    }
+  }, 800);
+});
+
+// ── Backup: re-scroll when any selectize dropdown appears ──
+$(document).on('DOMNodeInserted', '.selectize-dropdown', function() {
+  var dropdown = $(this);
+  if (dropdown.is(':visible')) {
+    setTimeout(function() {
+      scrollAboveKeyboard(dropdown[0]);
+    }, 200);
+  }
+});
+
 if (window.visualViewport) {
   window.visualViewport.addEventListener('resize', function() {
     var active = document.activeElement;
@@ -107,6 +129,27 @@ if (window.visualViewport) {
   });
 }
 
+// ── Watch for calendar popup and scroll into view ──
+var calendarObserver = new MutationObserver(function(mutations) {
+  mutations.forEach(function(m) {
+    if (m.addedNodes.length) {
+      var cal = $('.datepickers-container .datepicker, .air-datepicker-global-container .datepicker').filter(':visible').first();
+      if (cal.length) {
+        setTimeout(function() { scrollAboveKeyboard(cal[0]); }, 200);
+      }
+    }
+  });
+});
+$(document).on('shiny:connected', function() {
+  setTimeout(function() {
+    var containers = document.querySelectorAll('.datepickers-container, .air-datepicker-global-container');
+    containers.forEach(function(c) {
+      calendarObserver.observe(c, { childList: true, subtree: true });
+    });
+    calendarObserver.observe(document.body, { childList: true, subtree: false });
+  }, 500);
+});
+
 // ── Prevent soft keyboard on datepicker ──
 function makeDateReadonly() {
   var el = document.getElementById('purchase_date');
@@ -122,20 +165,11 @@ setTimeout(makeDateReadonly, 500);
 
 // ── Reset file input after send ──
 Shiny.addCustomMessageHandler('resetFileInput', function(id) {
-  // Clear the file input value
   $('#' + id).val('');
-  
-  // Reset the filename text
   $('#' + id).closest('.input-group').find('input.form-control').val('').attr('placeholder', 'Nothing selected');
-  
-  // Hide progress bar
   $('#' + id + '_progress').css('visibility', 'hidden');
   $('#' + id + '_progress .progress-bar').css('width', '0%').text('');
-  
-  // Clear photo preview
   $('#uploaded_photo img').attr('src', '').hide();
-  
-  // Tell Shiny the input is null
   Shiny.setInputValue(id, null);
 });
 
@@ -148,4 +182,3 @@ Shiny.addCustomMessageHandler('resetDatepicker', function(today) {
     Shiny.setInputValue('purchase_date', today);
   }
 });
-
