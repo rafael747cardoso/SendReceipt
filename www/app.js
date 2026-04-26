@@ -88,14 +88,22 @@ $(document).on('focus click', '.selectize-input input, #purchase_date', function
   }, 600);
 });
 
-// ── Backup: scroll calendar into view on click with longer delay ──
+// ── Reposition calendar above the input after it opens ──
 $(document).on('click', '#purchase_date', function() {
   setTimeout(function() {
-    var cal = $('[class*="datepicker"]').filter(':visible').not('#purchase_date').first();
+    var cal = $('[class*="datepicker"]').filter(':visible').not('#purchase_date').not('.datepickers-container').first();
     if (cal.length) {
+      var input = document.getElementById('purchase_date');
+      var inputRect = input.getBoundingClientRect();
+      var calHeight = cal.outerHeight();
+      var newTop = inputRect.top + window.scrollY - calHeight - 10;
+      cal.css({
+        'position': 'absolute',
+        'top': newTop + 'px'
+      });
       scrollAboveKeyboard(cal[0]);
     }
-  }, 800);
+  }, 300);
 });
 
 // ── Backup: re-scroll when any selectize dropdown appears ──
