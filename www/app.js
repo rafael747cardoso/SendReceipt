@@ -8,12 +8,13 @@ $(document).on('focus', '.selectize-input input', function() {
 });
 
 $(document).on('shiny:inputchanged', function(e) {
-  if (!activeSelectId) return;
-  if (e.name !== activeSelectId) return;
-  if (!e.value || e.value === '') return;
-  $('.selectize-control').removeClass('focus-blur-active');
-  document.activeElement.blur();
-  activeSelectId = null;
+  if (e.name === 'purchase_date') {
+    $('body').removeClass('datepicker-blur');
+    // Don't blur — just remove focus without scrolling
+    var scrollPos = window.scrollY;
+    document.activeElement.blur();
+    window.scrollTo(0, scrollPos);
+  }
 });
 
 $(document).on('mousedown touchstart', function(e) {
@@ -146,6 +147,41 @@ Shiny.addCustomMessageHandler('resetDatepicker', function(today) {
     el.value = today;
     $(el).trigger('change');
     Shiny.setInputValue('purchase_date', today);
+  }
+});
+
+// ── Watch for calendar popup appearing and scroll it into view ──
+var calendarObserver = new MutationObserver(function(mutations) {
+  mutations.forEach(function(m) {
+    if (m.addedNodes.length) {
+      var cal = $('.datepickers-container .datepicker, .air-datepicker-global-container .datepicker').filter(':visible').first();
+      if (cal.length) {
+        setTimeout(function() { scrollAboveKeyboard(cal[0]); }, 100);
+      }
+    }
+  });
+});
+$(document).on('shiny:connected', function() {
+  var containers = document.querySelectorAll('.datepickers-container, .air-datepicker-global-container, body');
+  containers.forEach(function(c) {
+    calendarObserver.observe(c, { childList: true, subtree: true });
+  });
+});
+
+// ── Re-trigger scroll after dynamic UI renders ──
+$(document).on('shiny:value', function(e) {
+  if (e.name === 'purchase_content_ui') {
+    // After purchase_content renders, hook its scroll behavior
+    setTimeout(function() {
+      $('#purchase_content').closest('.selectize-control').find('.selectize-input input').on('focus', function() {
+        var ctrl = $(this).closest('.selectize-control');
+        setTimeout(function() {
+          var dropdown = ctrl.find('.selectize-dropdown');
+          var target = (dropdown.length && dropdown.is(':visible')) ? dropdown[0] : ctrl[0];
+          scrollAboveKeyboard(target);
+        }, 600);
+      });
+    }, 300);
   }
 });
 

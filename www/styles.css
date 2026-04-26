@@ -31,12 +31,19 @@ body {
 .form-group.shiny-input-container:has(.btn-file):hover {
   border-color: rgba(255, 255, 255, 0.25);
 }
+
+/* ── Photo display box ── */
+#uploaded_photo {
+  max-height: 200px;
+  overflow-y: auto;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
 #uploaded_photo img {
   width: 100% !important;
   height: auto !important;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  margin-bottom: 8px;
 }
 
 /* ── Dividers ── */
