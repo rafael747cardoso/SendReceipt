@@ -215,8 +215,7 @@ body.datepicker-blur .datepicker--container {
     font-size: 16px !important; /* prevents iOS Safari from zooming in */
   }
 }
-
-/* ── Datepicker mobile fix ── */
+/* ── Datepicker mobile fix: open above ── */
 @media (max-width: 600px) {
   .datepickers-container,
   .air-datepicker-global-container {
@@ -229,5 +228,8 @@ body.datepicker-blur .datepicker--container {
     max-width: 92vw !important;
     left: 4vw !important;
     right: auto !important;
+  }
+  .air-datepicker-global-container .datepicker {
+    transform: translateY(-100%) translateY(-50px) !important;
   }
 }
