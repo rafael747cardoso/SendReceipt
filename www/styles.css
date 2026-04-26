@@ -233,3 +233,10 @@ body.datepicker-blur .datepicker--container {
     transform: translateY(-100%) translateY(-50px) !important;
   }
 }
+
+/* ── Disabled send button ── */
+.bttn-fill.bttn-primary:disabled {
+  pointer-events: none;
+  opacity: 0.35 !important;
+  box-shadow: none !important;
+}

@@ -182,3 +182,40 @@ Shiny.addCustomMessageHandler('resetDatepicker', function(today) {
     Shiny.setInputValue('purchase_date', today);
   }
 });
+
+// ── Disable send button until required fields are filled ──
+function checkSendButton() {
+  var photo = $('input#receipt_photo').val();
+  var estType = $('#establishment_type').val();
+  var estName = $('#establishment_name').val();
+  var purchType = $('#purchase_type').val();
+  var dateVal = $('#purchase_date').val();
+
+  var ready = photo && dateVal &&
+              estType && estType !== '' &&
+              estName && estName !== '' &&
+              purchType && purchType !== '';
+
+  var btn = $('.bttn-fill.bttn-primary');
+  if (ready) {
+    btn.prop('disabled', false).css('opacity', '1');
+  } else {
+    btn.prop('disabled', true).css('opacity', '0.35');
+  }
+}
+
+// Check on every input change
+$(document).on('shiny:inputchanged', function() {
+  setTimeout(checkSendButton, 100);
+});
+
+// Also check after dynamic UI renders
+$(document).on('shiny:value', function() {
+  setTimeout(checkSendButton, 300);
+});
+
+// Initial state: disabled
+$(document).on('shiny:connected', function() {
+  setTimeout(checkSendButton, 500);
+});
+
