@@ -208,7 +208,7 @@ body.datepicker-blur .datepicker--container {
 /* ── Mobile keyboard handling ── */
 @media (max-width: 600px) {
   body {
-    padding-bottom: 40vh; /* leaves room so bottom inputs don't hide behind keyboard */
+    padding-bottom: 60vh; /* leaves room so bottom inputs don't hide behind keyboard */
   }
   .inline-select .selectize-input,
   .inline-select input[type="text"].form-control {

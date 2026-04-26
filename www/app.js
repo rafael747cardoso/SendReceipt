@@ -88,6 +88,26 @@ $(document).on('focus click', '.selectize-input input, #purchase_date', function
   }, 600);
 });
 
+// ── Backup: scroll calendar into view on click with longer delay ──
+$(document).on('click', '#purchase_date', function() {
+  setTimeout(function() {
+    var cal = $('[class*="datepicker"]').filter(':visible').not('#purchase_date').first();
+    if (cal.length) {
+      scrollAboveKeyboard(cal[0]);
+    }
+  }, 800);
+});
+
+// ── Backup: re-scroll when any selectize dropdown appears ──
+$(document).on('DOMNodeInserted', '.selectize-dropdown', function() {
+  var dropdown = $(this);
+  if (dropdown.is(':visible')) {
+    setTimeout(function() {
+      scrollAboveKeyboard(dropdown[0]);
+    }, 200);
+  }
+});
+
 if (window.visualViewport) {
   window.visualViewport.addEventListener('resize', function() {
     var active = document.activeElement;
