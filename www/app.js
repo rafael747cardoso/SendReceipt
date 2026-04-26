@@ -185,16 +185,13 @@ Shiny.addCustomMessageHandler('resetDatepicker', function(today) {
 
 // ── Disable send button until required fields are filled ──
 function checkSendButton() {
-  var photo = $('input#receipt_photo').val();
-  var estType = $('#establishment_type').val();
-  var estName = $('#establishment_name').val();
-  var purchType = $('#purchase_type').val();
+  var hasPhoto = $('#receipt_photo_progress .progress-bar').text().indexOf('complete') >= 0;
   var dateVal = $('#purchase_date').val();
+  var estType = $('#establishment_type').val() || ($('#establishment_type + .selectize-control .item').length > 0);
+  var estName = $('#establishment_name + .selectize-control .item').length > 0 || ($('#establishment_name').val() && $('#establishment_name').val() !== '');
+  var purchType = $('#purchase_type + .selectize-control .item').length > 0 || ($('#purchase_type').val() && $('#purchase_type').val() !== '');
 
-  var ready = photo && dateVal &&
-              estType && estType !== '' &&
-              estName && estName !== '' &&
-              purchType && purchType !== '';
+  var ready = hasPhoto && dateVal && estType && estName && purchType;
 
   var btn = $('.bttn-fill.bttn-primary');
   if (ready) {
@@ -204,18 +201,14 @@ function checkSendButton() {
   }
 }
 
-// Check on every input change
 $(document).on('shiny:inputchanged', function() {
   setTimeout(checkSendButton, 100);
 });
 
-// Also check after dynamic UI renders
 $(document).on('shiny:value', function() {
   setTimeout(checkSendButton, 300);
 });
 
-// Initial state: disabled
 $(document).on('shiny:connected', function() {
   setTimeout(checkSendButton, 500);
 });
-
