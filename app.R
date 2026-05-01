@@ -78,6 +78,10 @@ ui <- shiny::fluidPage(
   ### Purchase Content ----
   shiny::uiOutput(outputId = "purchase_content_ui"),
   shiny::tags$hr(),
+
+  ### Payment Method ----
+  shiny::uiOutput(outputId = "payment_method_ui"),
+  shiny::tags$hr(),
   
   ## Button to send email ----
   shinyWidgets::actionBttn(
@@ -101,6 +105,7 @@ server <- function(input, output, session) {
   r$opts_establishment_name <- data.table::as.data.table(googlesheets4::read_sheet(gs_id, sheet = "establishment_name"))
   r$opts_purchase_type      <- data.table::as.data.table(googlesheets4::read_sheet(gs_id, sheet = "purchase_type"))
   r$opts_purchase_content   <- googlesheets4::read_sheet(gs_id, sheet = "purchase_content")$category
+  r$opts_payment_method     <- googlesheets4::read_sheet(gs_id, sheet = "payment_method")$display_name
   
   ## Build dropdowns ----
   
@@ -136,6 +141,19 @@ server <- function(input, output, session) {
   
   output$purchase_content_ui <- shiny::renderUI({
     fct_custom_select("Purchase Content", r)
+  })
+  
+  output$payment_method_ui <- shiny::renderUI({
+    shiny::div(
+      class = "inline-select",
+      shiny::selectizeInput(
+        inputId = "payment_method",
+        label = "Payment Method:",
+        choices = c("", r$opts_payment_method),
+        width = "100%",
+        options = list(placeholder = "Select method", create = FALSE)
+      )
+    )
   })
 
   ## Update categories ----
@@ -320,6 +338,9 @@ server <- function(input, output, session) {
     
     #### What: Purchase Type ----
     photo_name <- paste0(photo_name, "; ", input$purchase_type)
+    
+    #### How: Payment Method ----
+    photo_name <- paste0(photo_name, "; ", input$payment_method)
     
     #### What: Purchase Content ----
     # to use when the receipt has no info on the content of the purchase
