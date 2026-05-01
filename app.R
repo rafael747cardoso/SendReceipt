@@ -310,6 +310,7 @@ server <- function(input, output, session) {
     if (is.null(input$establishment_type) || trimws(input$establishment_type) == "") missing <- c(missing, "Establishment Type")
     if (is.null(input$establishment_name) || trimws(input$establishment_name) == "") missing <- c(missing, "Establishment Name")
     if (is.null(input$purchase_type) || trimws(input$purchase_type) == "") missing <- c(missing, "Purchase Type")
+    if (is.null(input$payment_method) || trimws(input$payment_method) == "") missing <- c(missing, "Payment Method")
     
     if (length(missing) > 0) {
       shinyWidgets::sendSweetAlert(
@@ -399,6 +400,7 @@ server <- function(input, output, session) {
       shiny::updateSelectizeInput(session, "establishment_name", selected = "")
       shiny::updateSelectizeInput(session, "purchase_type", selected = "")
       shiny::updateSelectizeInput(session, "purchase_content", selected = "")
+      shiny::updateSelectizeInput(session, "payment_method", selected = "")
       session$sendCustomMessage("resetFileInput", "receipt_photo")
       
     } else {
