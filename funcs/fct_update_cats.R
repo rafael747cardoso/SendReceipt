@@ -1,4 +1,3 @@
-
 fct_update_cats <- function(input_cat, var_name, r, session) {
   
   val <- tools::toTitleCase(trimws(input_cat))
@@ -9,10 +8,12 @@ fct_update_cats <- function(input_cat, var_name, r, session) {
     ### Update options ----
     r[[paste0("opts_", var_name)]] <- sort(c(r[[paste0("opts_", var_name)]], val))
     
-    ### Write to Google Sheet ----
-    googlesheets4::write_sheet(
-      data  = data.table::data.table(category = r[[paste0("opts_", var_name)]]),
+    ### Append the new row to the Google Sheet ----
+    ### (never rewrite the tab: MoneyBlueprint owns it and pushes canonical
+    ### rows; a rewrite from this session's stale snapshot would revert them)
+    googlesheets4::sheet_append(
       ss    = Sys.getenv("GS_SHEET_ID"),
+      data  = data.table::data.table(category = val),
       sheet = var_name
     )
     
@@ -26,4 +27,3 @@ fct_update_cats <- function(input_cat, var_name, r, session) {
   }    
   
 }
-
