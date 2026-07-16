@@ -1,4 +1,3 @@
-
 # Test mode ----
 test_mode <- Sys.getenv("TEST_MODE", "FALSE") == "TRUE"
 
@@ -78,7 +77,7 @@ ui <- shiny::fluidPage(
   ### Purchase Content ----
   shiny::uiOutput(outputId = "purchase_content_ui"),
   shiny::tags$hr(),
-
+  
   ### Payment Method ----
   shiny::uiOutput(outputId = "payment_method_ui"),
   shiny::tags$hr(),
@@ -110,7 +109,7 @@ server <- function(input, output, session) {
   ## Build dropdowns ----
   
   output$establishment_type_ui <- shiny::renderUI({
-    fct_custom_select("Establishment Type", r)
+    fct_custom_select("Establishment Type", r, create = FALSE)
   })
   
   output$establishment_name_ui <- shiny::renderUI({
@@ -155,14 +154,12 @@ server <- function(input, output, session) {
       )
     )
   })
-
+  
   ## Update categories ----
   
-  shiny::observeEvent(input$establishment_type, {
-    fct_update_cats(input_cat = input$establishment_type, 
-                    var_name = "establishment_type",
-                    r = r, session = session)
-  })
+  ## (establishment types are canonical-only -- the fixed five, managed in
+  ##  MoneyBlueprint -- so the type dropdown is select-only and the old
+  ##  create-observer is gone; the cascade observer below stays)
   
   shiny::observeEvent(input$establishment_name, {
     
@@ -175,7 +172,7 @@ server <- function(input, output, session) {
     ## Check if combo already exists ----
     existing <- r$opts_establishment_name
     already_exists <- any(tolower(existing$name) == tolower(val) & 
-                          tolower(existing$type) == tolower(current_type))
+                            tolower(existing$type) == tolower(current_type))
     
     if (!already_exists) {
       
@@ -185,10 +182,11 @@ server <- function(input, output, session) {
       r$opts_establishment_name <- rbind(r$opts_establishment_name, new_row)
       r$opts_establishment_name <- r$opts_establishment_name[order(name)]
       
-      ## Write to Google Sheet ----
-      googlesheets4::write_sheet(
-        data  = r$opts_establishment_name,
+      ## Append the new row to the Google Sheet ----
+      ## (MoneyBlueprint owns the tab; append only, never rewrite)
+      googlesheets4::sheet_append(
         ss    = gs_id,
+        data  = new_row,
         sheet = "establishment_name"
       )
       
@@ -224,10 +222,11 @@ server <- function(input, output, session) {
       r$opts_purchase_type <- rbind(r$opts_purchase_type, new_row)
       r$opts_purchase_type <- r$opts_purchase_type[order(purchase)]
       
-      ## Write to Google Sheet ----
-      googlesheets4::write_sheet(
-        data  = r$opts_purchase_type,
+      ## Append the new row to the Google Sheet ----
+      ## (MoneyBlueprint owns the tab; append only, never rewrite)
+      googlesheets4::sheet_append(
         ss    = gs_id,
+        data  = new_row,
         sheet = "purchase_type"
       )
       
@@ -247,7 +246,7 @@ server <- function(input, output, session) {
                     var_name = "purchase_content",
                     r = r, session = session)
   })
-
+  
   ## Filters in dropdowns ----
   shiny::observeEvent(input$establishment_type, {
     
@@ -351,7 +350,7 @@ server <- function(input, output, session) {
         photo_name <- paste0(photo_name, "; ", purchase_content)
       }
     }
-
+    
     ### Send email via Resend API ----
     
     #### Photo data ----
@@ -384,7 +383,7 @@ server <- function(input, output, session) {
         httr2::req_perform(),
       error = function(e) e
     )
-
+    
     #### Response status ----
     if (httr2::resp_status(resp) == 200) {
       shinyWidgets::sendSweetAlert(
@@ -411,9 +410,9 @@ server <- function(input, output, session) {
         type = "error"
       )
     }
-
+    
   })
-
+  
 }
 
 # Run the application ----
